@@ -9,6 +9,11 @@ typedef struct{
     short int id_jogador; // Para saber quem é o dono dessa peça  
 }peca;
 
+/**
+ * Função para criar peças de dominó.
+ * Esta função gera peças de dominó aleatórias atribuindo valores aleatórios aos lados esquerdo e direito de cada peça.
+ * Também atribui um ID único a cada peça.
+ */
 void criar_pecas (){
     int i, j;
     peca p;
