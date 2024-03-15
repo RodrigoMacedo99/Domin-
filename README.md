@@ -12,6 +12,7 @@ O dominó é um jogo antigo e popular, originado na China por volta de 243 a.C.,
 
 ## Intruções e requisitos
 
+- [x] **Criar peças:** Criar todas as peças do jogo. 
 - [ ] **Número de Jogadores:** O programa deve suportar dois ou quatro jogadores. 
 - [ ] **Nomes dos Jogadores:** Deve ser solicitado o nome dos jogadores no início do jogo.
 - [ ] **Estruturas de Dados:** Utilize as estruturas de dados e algoritmos mais adequados para resolver o problema.
