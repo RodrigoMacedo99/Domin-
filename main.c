@@ -11,10 +11,6 @@ void inicializar_jogo();
 
 
 int main(){
-    tp_pilha pilha_pecas;
-    inicializa_pilha(&pilha_pecas);
-    inicializar_jogo(&pilha_pecas);
-    imprime_pilha(pilha_pecas);
-
+    central_game();
     return 0;
 }

@@ -23,7 +23,7 @@ void criar_pecas (peca *vetor_pecas[]){
         peca *p = malloc(sizeof(peca)); //Alocando memória para a peça
         p->lado_direito = i;
         p->lado_esquerdo = j;
-        p->id_peca = rand() % 100;
+        p->id_peca = rand() % 1000;
 
         //Atribuindo a peça ao vetor de peças
         vetor_pecas[i*7+j] = p;
@@ -35,7 +35,7 @@ void criar_pecas (peca *vetor_pecas[]){
  * Função para embaralhar as peças de dominó.
  * Esta função embaralha as peças de dominó de forma aleatória.
  */
-void  embaralhar_alg_ord(peca  *vetor_pecas[]){
+void  embaralhar_alg_ord (peca  *vetor_pecas[]){
     int i, j, min, tam = 28;
     peca *x;
 
@@ -53,7 +53,7 @@ void  embaralhar_alg_ord(peca  *vetor_pecas[]){
 }
 
 // Função para inicializar o jogo de dominó
-void inicializar_jogo(tp_pilha *pilha_pecas){
+void inicializar_jogo (tp_pilha *pilha_pecas){
    
     //Alocando memória para o vetor de peças
     peca **vetor_pecas = NULL;
@@ -73,6 +73,13 @@ void inicializar_jogo(tp_pilha *pilha_pecas){
     }
 }
 
+
+ void central_game (){
+    tp_pilha pilha_pecas;
+    inicializa_pilha(&pilha_pecas);
+    inicializar_jogo(&pilha_pecas);
+    imprime_pilha(pilha_pecas);
+ }
 #endif
 
 /*int main (){
