@@ -6,6 +6,7 @@
 #include "model.h"
 #include <time.h>
 #include "pilha.h"
+#include "viwer.h"
 
 /**
  * Função para criar peças de dominó.
@@ -73,7 +74,7 @@ void inicializar_jogo (tp_pilha *pilha_pecas){
     }
 }
 
-
+// Função para centralizar o jogo
  void central_game (){
     tp_pilha pilha_pecas;
     inicializa_pilha(&pilha_pecas);
@@ -81,20 +82,3 @@ void inicializar_jogo (tp_pilha *pilha_pecas){
     imprime_pilha(pilha_pecas);
  }
 #endif
-
-/*int main (){
-    peca **vetor_pecas;
-    vetor_pecas = malloc(28 * sizeof(peca*));
-    for (int i = 0; i < 28; i++){
-        vetor_pecas[i] = malloc(sizeof(peca));
-    }
-    
-    criar_pecas(vetor_pecas);
-    embaralhar_alg_ord(vetor_pecas);
-    
-    for (int i = 0; i < 28; i++){
-        printf(" id_peça: %hd\n",  vetor_pecas[i]->id_peca);
-    }
-
-    return 0;
-}*/

@@ -55,7 +55,7 @@ void imprime_pilha(tp_pilha p){
     printf("\n");
     while (!pilha_vazia(&p)){
         pop(&p, &e);
-        printf("|%d|%d|  ID_PECA-> %hd",e.lado_direito, e.lado_esquerdo, e.id_peca);
+        printf("[%d|%d]",e.lado_direito, e.lado_esquerdo /*e.id_peca*/);
         printf("\n");
     }
 }
