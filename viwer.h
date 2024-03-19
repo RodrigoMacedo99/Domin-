@@ -8,6 +8,15 @@
 
 int apresenta_menu_principal(){
 
+    int opcao = 0;
+
+    printf("--- BEM VINDO AO JOGO DE DOMINO DO GRUPO GCC ---\n\n");
+    printf("Escolha uma opcao abaixo:\n");
+    printf("1 - Iniciar novo Jogo");
+
+
+    scanf("%d", &opcao);
+
     return opcao;
 }
 
