@@ -1,19 +1,11 @@
+#ifndef CONTROL_C
+#define CONTROL_C
+
 #include <stdio.h>
 #include <stdlib.h>
+#include "model.h"
 #include <time.h>
-
-typedef struct{
-    int lado_direito; // Valor de um lado da peça  
-    int lado_esquerdo; // Valor do outro lado da peça  
-    short int id_peca; // Para poder embaralhar as peças 
-    short int id_jogador; // Para saber quem é o dono dessa peça  
-}peca;
-
-typedef struct {
-    char nome[50];
-    short int id_jogador_2; // Para saber de quem é a peça da lista princiapal 
-    peca mao[7]; //substituir por lista encadeada ou usar a comparação de id's
-}jogador;
+#include "pilha.h"
 
 /**
  * Função para criar peças de dominó.
@@ -60,7 +52,30 @@ void  embaralhar_alg_ord(peca  *vetor_pecas[]){
     }
 }
 
-int main (){
+// Função para inicializar o jogo de dominó
+void inicializar_jogo(tp_pilha *pilha_pecas){
+   
+    //Alocando memória para o vetor de peças
+    peca **vetor_pecas = NULL;
+    vetor_pecas = malloc(28 * sizeof(peca*));
+    for (int i = 0; i < 28; i++){
+        vetor_pecas[i] = malloc(sizeof(peca));
+    }
+    
+    //Criando e embaralhando as peças
+    criar_pecas(vetor_pecas);
+    embaralhar_alg_ord(vetor_pecas);
+    
+    //Empilhando as peças
+    for (int i = 0; i < 28; i++){
+        push(pilha_pecas, *vetor_pecas[i]);
+        //printf(" id_peça: %hd\n",  vetor_pecas[i]->id_peca);
+    }
+}
+
+#endif
+
+/*int main (){
     peca **vetor_pecas;
     vetor_pecas = malloc(28 * sizeof(peca*));
     for (int i = 0; i < 28; i++){
@@ -75,4 +90,4 @@ int main (){
     }
 
     return 0;
-}
+}*/
