@@ -14,8 +14,11 @@ typedef struct{
 
 typedef struct {
     char nome[50];
-    short int id_jogador_2; // Para saber de quem é a peça da lista princiapal 
+    short int id_do_jogador; // Para saber de quem é a peça da lista princiapal 
     //peca mao[7]; //substituir por lista encadeada ou usar a comparação de id's
 }jogador;
+
+typedef struct{
+}mesa;
 
 #endif

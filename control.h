@@ -6,7 +6,9 @@
 #include "model.h"
 #include <time.h>
 #include "pilha.h"
+#include "fila.h"
 #include "viwer.h"
+
 
 /**
  * Função para criar peças de dominó.
@@ -54,7 +56,7 @@ void  embaralhar_alg_ord (peca  *vetor_pecas[]){
 }
 
 // Função para inicializar o jogo de dominó
-void inicializar_jogo (tp_pilha *pilha_pecas){
+void inicializar_mesa (tp_pilha *pilha_pecas){
    
     //Alocando memória para o vetor de peças
     peca **vetor_pecas = NULL;
@@ -72,13 +74,43 @@ void inicializar_jogo (tp_pilha *pilha_pecas){
         push(pilha_pecas, *vetor_pecas[i]);
         //printf(" id_peça: %hd\n",  vetor_pecas[i]->id_peca);
     }
+
+    free(vetor_pecas);
+}
+
+void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
+
+    jogador jogadores;
+
+    for(int i = 1; i <= quantidade_jogadores; i++){        
+        //Atribuindo o id do jogador
+        jogadores.id_do_jogador = i;
+
+        //Recebendo o nome do jogador
+        printf("\n Digite o nome do jogador %d: ", jogadores.id_do_jogador);
+        scanf("%s", jogadores.nome);
+        int o = insere_fila(fila_jogadores, jogadores);
+        printf("\n %d", o);
+
+    }
 }
 
 // Função para centralizar o jogo
  void central_game (){
+
     tp_pilha pilha_pecas;
     inicializa_pilha(&pilha_pecas);
-    inicializar_jogo(&pilha_pecas);
+    inicializar_mesa(&pilha_pecas);
     imprime_pilha(pilha_pecas);
+    printf("\n primeiro \n");
+    fflush(stdout);
+    
+    
+    tp_fila fila_jogadores;
+    printf("\n segundo \n");
+    
+    inicializa_fila(&fila_jogadores);
+    inicializar_jogadores(&fila_jogadores,  introducao());
+    imprime_fila(fila_jogadores);
  }
 #endif

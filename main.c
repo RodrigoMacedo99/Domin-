@@ -5,11 +5,6 @@
 #include "pilha.h"
 
 
-
-// Função para inicializar o jogo
-void inicializar_jogo();
-
-
 int main(){
     central_game();
     return 0;

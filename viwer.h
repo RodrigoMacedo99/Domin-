@@ -20,9 +20,9 @@ int apresenta_menu_principal(){
     return opcao;
 }
 
-int quantidade_jogadores(){
+int introducao(){
 
-    int opcao = 0;
+    int opcao;
 
     printf("--- BEM VINDO AO JOGO DE DOMINO ---\n\n");
     printf("Selecione a quantidade de jogadores: [2] [4]\n");
@@ -31,24 +31,37 @@ int quantidade_jogadores(){
     return opcao;
 }
 
-void nome_jogadores(int quantidade_jogadores, char *nome_jogadores[] ){
+void add_nome_jogadores(int quantidade_jogadores, jogador *nome_jogadores[], tp_fila *fila_jogadores){
 
-    for(int i = 0; i < quantidade_jogadores; i++){
-        printf("Digite o nome do jogador %d: ", i+1);
-        scanf("%s", nome_jogadores[i]);
+    for(int i = 1; i < quantidade_jogadores; i++){
+        //Alocando memória para o jogador
+        nome_jogadores[i] = malloc(sizeof(jogador));
+        
+        //Atribuindo o id do jogador
+        nome_jogadores[i]->id_do_jogador = i;
+
+        //Recebendo o nome do jogador
+        printf("\n Digite o nome do jogador %d: ", nome_jogadores[i]->id_do_jogador);
+        scanf("%s", nome_jogadores[i]->nome);
+        insere_fila(fila_jogadores, *nome_jogadores[i]);
     }
+
+    //Imprimindo mensagem de sucesso
+    printf("Jogadores cadastrados com sucesso!\n");
 }
 
-int menu_de_jogada(char *nome_jogador){
+int menu_de_jogada(jogador *jogador_vez[]){
     int opcao = 0;
 
-    printf("Vez do jogador %s\n", nome_jogador);
+    // Mostrando o jogador da vez
+    printf("Vez do jogador %s\n", jogador_vez[0]->nome);
 
+    // Mostrando as opções de jogada
     printf("Escolha uma opcao abaixo:\n");
-    printf("1 - Mesa do Domino");
-    printf("2 - Ver suas pecas");
-    printf("3 - Comprar peca");
-    printf("4 - Jogar");
+    printf("1 - Mesa do Domino\n");
+    printf("2 - Ver suas pecas\n");
+    printf("3 - Comprar peca\n");
+    printf("4 - Jogar\n");
     
     scanf("%d", &opcao);
     return opcao;
