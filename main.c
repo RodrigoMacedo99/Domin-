@@ -6,6 +6,6 @@
 
 
 int main(){
-    central_game();
+    configuracao_inicial();
     return 0;
 }

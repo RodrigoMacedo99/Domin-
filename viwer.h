@@ -31,24 +31,23 @@ int introducao(){
     return opcao;
 }
 
-void add_nome_jogadores(int quantidade_jogadores, jogador *nome_jogadores[], tp_fila *fila_jogadores){
+void add_nome_jogadores(int quantidade_jogadores, tp_fila *fila_jogadores){
+    jogador jogador_dados;
 
     for(int i = 1; i < quantidade_jogadores; i++){
-        //Alocando memória para o jogador
-        nome_jogadores[i] = malloc(sizeof(jogador));
-        
         //Atribuindo o id do jogador
-        nome_jogadores[i]->id_do_jogador = i;
+        jogador_dados.id_do_jogador = i;
 
         //Recebendo o nome do jogador
-        printf("\n Digite o nome do jogador %d: ", nome_jogadores[i]->id_do_jogador);
-        scanf("%s", nome_jogadores[i]->nome);
-        insere_fila(fila_jogadores, *nome_jogadores[i]);
+        printf("\n Digite o nome do jogador: ");
+        scanf("%s", jogador_dados.nome);
+        insere_fila(fila_jogadores, jogador_dados);
+        fflush(stdin);
     }
 
     //Imprimindo mensagem de sucesso
     printf("Jogadores cadastrados com sucesso!\n");
-}
+    }
 
 int menu_de_jogada(jogador *jogador_vez[]){
     int opcao = 0;

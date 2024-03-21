@@ -73,6 +73,7 @@ void inicializar_mesa (tp_pilha *pilha_pecas){
     for (int i = 0; i < 28; i++){
         push(pilha_pecas, *vetor_pecas[i]);
         //printf(" id_peça: %hd\n",  vetor_pecas[i]->id_peca);
+        fflush(stdin);
     }
 
     free(vetor_pecas);
@@ -91,26 +92,28 @@ void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
         scanf("%s", jogadores.nome);
         int o = insere_fila(fila_jogadores, jogadores);
         printf("\n %d", o);
-
+        fflush(stdin);
     }
 }
 
 // Função para centralizar o jogo
- void central_game (){
+ void configuracao_inicial (){
 
     tp_pilha pilha_pecas;
     inicializa_pilha(&pilha_pecas);
     inicializar_mesa(&pilha_pecas);
     imprime_pilha(pilha_pecas);
     printf("\n primeiro \n");
-    fflush(stdout);
-    
+    fflush(stdin);
+
     
     tp_fila fila_jogadores;
     printf("\n segundo \n");
     
     inicializa_fila(&fila_jogadores);
-    inicializar_jogadores(&fila_jogadores,  introducao());
+    //inicializar_jogadores(&fila_jogadores,  introducao());
+    add_nome_jogadores(introducao(), &fila_jogadores);
+    printf("\n terceiro \n");
     imprime_fila(fila_jogadores);
  }
 #endif
