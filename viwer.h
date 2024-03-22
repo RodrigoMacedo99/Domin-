@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "pilha.h"
+#include "fila.h"
 #include "model.h"
+
 
 int apresenta_menu_principal(){
 
@@ -34,19 +36,23 @@ int introducao(){
 void add_nome_jogadores(int quantidade_jogadores, tp_fila *fila_jogadores){
     jogador jogador_dados;
 
-    for(int i = 1; i < quantidade_jogadores; i++){
+   // quantidade_jogadores++;
+    printf("%d", quantidade_jogadores);
+    for(int i = 0; i < quantidade_jogadores; i++){
         //Atribuindo o id do jogador
         jogador_dados.id_do_jogador = i;
-
         //Recebendo o nome do jogador
-        printf("\n Digite o nome do jogador: ");
-        scanf("%s", jogador_dados.nome);
+        printf("\n Digite o nome do jogador %d: ", jogador_dados.id_do_jogador);
+        gets(jogador_dados.nome);
         insere_fila(fila_jogadores, jogador_dados);
         fflush(stdin);
+   
     }
 
     //Imprimindo mensagem de sucesso
-    printf("Jogadores cadastrados com sucesso!\n");
+    printf("\n\nJogadores cadastrados com sucesso!\n\n");
+    system("pause");
+    system("clear");
     }
 
 int menu_de_jogada(jogador *jogador_vez[]){

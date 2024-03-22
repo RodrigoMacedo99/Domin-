@@ -52,6 +52,7 @@ int top(tp_pilha *p, tp_item *e){
 
 void imprime_pilha(tp_pilha p){
     tp_item e;
+	printf("Pilha impressao\n");
     printf("\n");
     while (!pilha_vazia(&p)){
         pop(&p, &e);

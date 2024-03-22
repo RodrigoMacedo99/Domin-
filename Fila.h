@@ -55,7 +55,7 @@ void imprime_fila (tp_fila f){
     tp_item2 e;
     while(!fila_vazia(&f)){
         remove_fila(&f, &e);
-        printf("\n%c  | %hd", e.nome, e.id_do_jogador);
+        printf("\n%hd | %s", e.id_do_jogador, e.nome);
     }
 }
 

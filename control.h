@@ -49,6 +49,7 @@ void  embaralhar_alg_ord (peca  *vetor_pecas[]){
                 min = j;
         }
 
+        //Troca de peças
         x = vetor_pecas[min];
         vetor_pecas[min] = vetor_pecas[i];
         vetor_pecas[i] = x;
@@ -62,21 +63,24 @@ void inicializar_mesa (tp_pilha *pilha_pecas){
     peca **vetor_pecas = NULL;
     vetor_pecas = malloc(28 * sizeof(peca*));
     for (int i = 0; i < 28; i++){
-        vetor_pecas[i] = malloc(sizeof(peca));
+        vetor_pecas[i] = (peca*)malloc(sizeof(peca));
     }
     
     //Criando e embaralhando as peças
     criar_pecas(vetor_pecas);
     embaralhar_alg_ord(vetor_pecas);
     
+    //--------------------------------------------------------------------------------
+    //Variável local para armazenar a peça no laço de empilhamento de peças
+    peca peca_local;
+
     //Empilhando as peças
     for (int i = 0; i < 28; i++){
-        push(pilha_pecas, *vetor_pecas[i]);
-        //printf(" id_peça: %hd\n",  vetor_pecas[i]->id_peca);
-        fflush(stdin);
+        peca_local = *vetor_pecas[i];
+        push(pilha_pecas, peca_local);
+        free(vetor_pecas[i]);//liberando memória alocada para a peça
     }
 
-    free(vetor_pecas);
 }
 
 void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
@@ -86,6 +90,8 @@ void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
     for(int i = 1; i <= quantidade_jogadores; i++){        
         //Atribuindo o id do jogador
         jogadores.id_do_jogador = i;
+        printf("....");
+
 
         //Recebendo o nome do jogador
         printf("\n Digite o nome do jogador %d: ", jogadores.id_do_jogador);
@@ -103,17 +109,11 @@ void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
     inicializa_pilha(&pilha_pecas);
     inicializar_mesa(&pilha_pecas);
     imprime_pilha(pilha_pecas);
-    printf("\n primeiro \n");
-    fflush(stdin);
 
     
-    tp_fila fila_jogadores;
-    printf("\n segundo \n");
-    
+    tp_fila fila_jogadores;    
     inicializa_fila(&fila_jogadores);
-    //inicializar_jogadores(&fila_jogadores,  introducao());
     add_nome_jogadores(introducao(), &fila_jogadores);
-    printf("\n terceiro \n");
     imprime_fila(fila_jogadores);
  }
-#endif
+#endif  
