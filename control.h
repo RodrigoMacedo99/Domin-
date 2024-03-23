@@ -15,7 +15,7 @@
  * Esta função gera peças de dominó aleatórias atribuindo valores aleatórios aos lados esquerdo e direito de cada peça.
  * Também atribui um ID único a cada peça.
  */
-void criar_pecas (peca *vetor_pecas[]){
+void criar_pecas (peca* vetor_pecas[]){
     int i, j;
     srand(time(NULL));
 
@@ -23,14 +23,14 @@ void criar_pecas (peca *vetor_pecas[]){
     for(i = 0; i <= 6; i++ )
         for(j = 0; j <= 6; j++){
         
-        peca *p = malloc(sizeof(peca)); //Alocando memória para a peça
+        peca *p = (peca*) malloc(sizeof(peca));
         p->lado_direito = i;
         p->lado_esquerdo = j;
         p->id_peca = rand() % 1000;
-
+        
         //Atribuindo a peça ao vetor de peças
-        vetor_pecas[i*7+j] = p;
-        //printf(" id_peça: %hd\n",  vetor_pecas[i*7+j]->id_peca);
+        vetor_pecas[i*7+j] = p; 
+        //printf(" id_peca: %hd\n",  vetor_pecas[i*7+j]->id_peca);
     }
 }
 
@@ -38,7 +38,7 @@ void criar_pecas (peca *vetor_pecas[]){
  * Função para embaralhar as peças de dominó.
  * Esta função embaralha as peças de dominó de forma aleatória.
  */
-void  embaralhar_alg_ord (peca  *vetor_pecas[]){
+void  embaralhar_alg_ord (peca* vetor_pecas[]){
     int i, j, min, tam = 28;
     peca *x;
 
@@ -58,29 +58,23 @@ void  embaralhar_alg_ord (peca  *vetor_pecas[]){
 
 // Função para inicializar o jogo de dominó
 void inicializar_mesa (tp_pilha *pilha_pecas){
-   
+
     //Alocando memória para o vetor de peças
     peca **vetor_pecas = NULL;
     vetor_pecas = malloc(28 * sizeof(peca*));
     for (int i = 0; i < 28; i++){
-        vetor_pecas[i] = (peca*)malloc(sizeof(peca));
+        vetor_pecas[i] = malloc(sizeof(peca));
     }
-    
+
     //Criando e embaralhando as peças
     criar_pecas(vetor_pecas);
     embaralhar_alg_ord(vetor_pecas);
     
-    //--------------------------------------------------------------------------------
-    //Variável local para armazenar a peça no laço de empilhamento de peças
-    peca peca_local;
 
     //Empilhando as peças
     for (int i = 0; i < 28; i++){
-        peca_local = *vetor_pecas[i];
-        push(pilha_pecas, peca_local);
-        free(vetor_pecas[i]);//liberando memória alocada para a peça
+        push(pilha_pecas, *vetor_pecas[i]);
     }
-
 }
 
 void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
@@ -90,14 +84,12 @@ void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
     for(int i = 1; i <= quantidade_jogadores; i++){        
         //Atribuindo o id do jogador
         jogadores.id_do_jogador = i;
-        printf("....");
 
 
         //Recebendo o nome do jogador
         printf("\n Digite o nome do jogador %d: ", jogadores.id_do_jogador);
         scanf("%s", jogadores.nome);
-        int o = insere_fila(fila_jogadores, jogadores);
-        printf("\n %d", o);
+        insere_fila(fila_jogadores, jogadores);
         fflush(stdin);
     }
 }
@@ -108,12 +100,15 @@ void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
     tp_pilha pilha_pecas;
     inicializa_pilha(&pilha_pecas);
     inicializar_mesa(&pilha_pecas);
+    printf("Pecas dos dados: ");
     imprime_pilha(pilha_pecas);
 
     
     tp_fila fila_jogadores;    
     inicializa_fila(&fila_jogadores);
-    add_nome_jogadores(introducao(), &fila_jogadores);
+    inicializar_jogadores(&fila_jogadores, introducao());
+    printf("\n\nid| Nome");
+    printf("\n------------");
     imprime_fila(fila_jogadores);
  }
 #endif  

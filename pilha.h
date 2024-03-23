@@ -52,8 +52,8 @@ int top(tp_pilha *p, tp_item *e){
 
 void imprime_pilha(tp_pilha p){
     tp_item e;
-	printf("Pilha impressao\n");
-    printf("\n");
+	//printf("Pilha impressao\n");
+    //printf("\n");
     while (!pilha_vazia(&p)){
         pop(&p, &e);
         printf("[%d:%d]",e.lado_direito, e.lado_esquerdo /*e.id_peca*/);

@@ -26,17 +26,18 @@ int introducao(){
 
     int opcao;
 
-    printf("--- BEM VINDO AO JOGO DE DOMINO ---\n\n");
+    printf("\n\n\<=======>BEM VINDO AO JOGO DE DOMINO <=======>\n\n");
     printf("Selecione a quantidade de jogadores: [2] [4]\n");
+    printf("> ");
 
     scanf("%d", &opcao);
     return opcao;
 }
 
-void add_nome_jogadores(int quantidade_jogadores, tp_fila *fila_jogadores){
+/*void add_nome_jogadores(int quantidade_jogadores, tp_fila *fila_jogadores){
     jogador jogador_dados;
 
-   // quantidade_jogadores++;
+    ++quantidade_jogadores;
     printf("%d", quantidade_jogadores);
     for(int i = 0; i < quantidade_jogadores; i++){
         //Atribuindo o id do jogador
@@ -51,11 +52,9 @@ void add_nome_jogadores(int quantidade_jogadores, tp_fila *fila_jogadores){
 
     //Imprimindo mensagem de sucesso
     printf("\n\nJogadores cadastrados com sucesso!\n\n");
-    system("pause");
-    system("clear");
-    }
+    }*/
 
-int menu_de_jogada(jogador *jogador_vez[]){
+/*int menu_de_jogada(jogador *jogador_vez[]){
     int opcao = 0;
 
     // Mostrando o jogador da vez
@@ -70,6 +69,6 @@ int menu_de_jogada(jogador *jogador_vez[]){
     
     scanf("%d", &opcao);
     return opcao;
-}
+}*/
 
 #endif
