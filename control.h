@@ -95,20 +95,17 @@ void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
 }
 
 // Função para centralizar o jogo
- void configuracao_inicial (){
-
-    tp_pilha pilha_pecas;
-    inicializa_pilha(&pilha_pecas);
-    inicializar_mesa(&pilha_pecas);
+void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
+    inicializa_pilha(pilha_pecas);
+    inicializar_mesa(pilha_pecas);
     printf("Pecas dos dados: ");
-    imprime_pilha(pilha_pecas);
+    imprime_pilha(*pilha_pecas);
 
-    
-    tp_fila fila_jogadores;    
-    inicializa_fila(&fila_jogadores);
-    inicializar_jogadores(&fila_jogadores, introducao());
+    inicializa_fila(fila_jogadores);
+    inicializar_jogadores(fila_jogadores, introducao());
     printf("\n\nid| Nome");
     printf("\n------------");
-    imprime_fila(fila_jogadores);
- }
+    imprime_fila(*fila_jogadores);
+}
+
 #endif  
