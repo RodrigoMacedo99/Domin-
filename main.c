@@ -14,7 +14,7 @@ int main() {
 
 	printf("\n\n\n\ Lista de nomes na main:\n");
 	printf("id| nome");
-	printf("--+---------");
+	printf("\n--+---------");
 	imprime_fila(jogadores);
 	
 	printf("\n\n\n\nPECAS DO JOGO: ");
