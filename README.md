@@ -15,10 +15,10 @@ O dominó é um jogo antigo e popular, originado na China por volta de 243 a.C.,
 - [x] **Criar peças:** Criar todas as peças do jogo. 
 - [x] **Número de Jogadores:** O programa deve suportar dois ou quatro jogadores. 
 - [x] **Nomes dos Jogadores:** Deve ser solicitado o nome dos jogadores no início do jogo.
-- [ ] **Estruturas de Dados:** Utilize as estruturas de dados e algoritmos mais adequados para resolver o problema.
-- [ ] **Alocação Dinâmica:** Implemente a sequência de peças na mesa utilizando alocação dinâmica.
-- [ ] **Ordenação das Peças:** Mantenha as peças na mão dos jogadores sempre ordenadas pelo somatório dos números nelas contidos.
-- [ ] **Documentação:** Documente o algoritmo com comentários claros para facilitar a compreensão e manutenção do código.
+- [x] **Estruturas de Dados:** Utilize as estruturas de dados e algoritmos mais adequados para resolver o problema.
+- [x] **Alocação Dinâmica:** Implemente a sequência de peças na mesa utilizando alocação dinâmica.
+- [x] **Ordenação das Peças:** Mantenha as peças na mão dos jogadores sempre ordenadas pelo somatório dos números nelas contidos.
+- [x] **Documentação:** Documente o algoritmo com comentários claros para facilitar a compreensão e manutenção do código.
 
 > [!IMPORTANT] 
 >  O jogo termina quando o primeiro jogador "baixar" todas as suas peças na mesa.
