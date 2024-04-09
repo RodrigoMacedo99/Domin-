@@ -21,12 +21,13 @@ int main() {
     // Inicializando o jogo criando as peças de dominó, embaralhando-as e inicializando a mesa e adicionando os jogadores
     configuracao_inicial(&pecas, &jogadores);
 	system("pause");
-	printf("\n\n\n\Lista de nomes na main:\n\n");
+	printf("\n\n\n Lista de nomes na main:\n\n");
 	printf("id| nome");
 	printf("\n--+---------");
 	imprime_fila(jogadores);
-	
 	printf("\n\n\n\nPECAS DO JOGO: ");
 	imprime_pilha(pecas);
+
+
     return 0;
 }

@@ -88,4 +88,16 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
     inicializar_jogadores(fila_jogadores, introducao());
 }
 
+void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
+    inicializa_pilha(pilha_pecas);
+    inicializar_mesa(pilha_pecas);
+    printf("Pecas dos dados: ");
+    imprime_pilha(*pilha_pecas);
+
+    inicializa_fila(fila_jogadores);
+    inicializar_jogadores(fila_jogadores, introducao());
+    printf("\n\nid| Nome");
+    printf("\n------------");
+    imprime_fila(*fila_jogadores);
+}
 #endif  

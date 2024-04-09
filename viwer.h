@@ -22,8 +22,7 @@ int introducao(){
             printf("\n\nOpcao invalida, tente novamente!\n\n");
         }
     }
-
-
+    
     return opcao;
 }
 
