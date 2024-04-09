@@ -88,6 +88,7 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
     inicializar_jogadores(fila_jogadores, introducao());
 }
 
+// Função para centralizar o jogo
 void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
     inicializa_pilha(pilha_pecas);
     inicializar_mesa(pilha_pecas);
