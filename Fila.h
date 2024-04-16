@@ -1,13 +1,15 @@
 #ifndef FILA_H
 #define FILA_H
+
 #include <stdio.h>
+#include "lista_de.h"
 #include "model.h"
 #define MAX 28
 
-typedef jogador tp_item2;
+typedef jogador item_jogador;
 
 typedef struct {
-    tp_item2 item[MAX];
+    item_jogador item[MAX];
     int ini, fim;
  //   int tam;
 } tp_fila;
@@ -33,7 +35,7 @@ int fila_cheia (tp_fila *f){
     return 0;
 }
 
-int insere_fila (tp_fila *f, tp_item2 e){
+int insere_fila (tp_fila *f, item_jogador e){
     if(fila_cheia(f)) 
         return 0; //Não foi possível adicionar a fila  
     f->fim = proximo(f->fim);
@@ -42,7 +44,7 @@ int insere_fila (tp_fila *f, tp_item2 e){
     return 1;
 }
 
-int remove_fila (tp_fila *f, tp_item2 *e){
+int remove_fila (tp_fila *f, item_jogador *e){
     if(fila_vazia(f)) 
         return 0; //Não foi possível remover da fila
     f->ini = proximo(f->ini);
@@ -51,12 +53,30 @@ int remove_fila (tp_fila *f, tp_item2 *e){
     return 1;
 }
 
+/*void inicio_fila(tp_fila *f){
+    if(fila_vazia(f)){
+        printf("Fila vazia\n");
+        return;
+    }
+    item_jogador e = f->item[f->ini];
+    printf("Informações do dado no início da fila:\n");
+    printf("ID: %hd\n", e.id_do_jogador);
+    printf("Nome: %s\n", e.nome);
+}*/
+
 void imprime_fila (tp_fila f){
-    tp_item2 e;
+    item_jogador e;
+    printf("\n Nomes dos jogadores:\n\n");
+	printf("id| nome  | mao");
+	printf("\n--+------+---------------------------");
     while(!fila_vazia(&f)){
         remove_fila(&f, &e);
-        printf("\n%hd | %s", e.id_do_jogador, e.nome);
+        printf("\n%hd | %s ", e.id_do_jogador, e.nome);
+        imprime_listad(f.item[f.ini].mao, 1);
     }
+    printf("\n\n\n\n");
+    system("pause");
+    system("cls");
 }
 
 // Duas opções de código do tamanho_fila     
@@ -67,8 +87,8 @@ void imprime_fila (tp_fila f){
  }*/
  
  int tamanho_fila(tp_fila f){
-    int cont=0;
-	tp_item2 e;
+    short int cont=0;
+	item_jogador e;
     while(!fila_vazia(&f)){
         remove_fila(&f, &e);
         cont++;

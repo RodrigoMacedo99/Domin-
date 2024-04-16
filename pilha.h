@@ -3,14 +3,15 @@
 
 
 #include <stdio.h>
+#include <windows.h>
 #include "model.h"
 #define MAX 28
 
-typedef peca tp_item;
+typedef peca item_pilha;
 
 typedef struct {
 	int topo;
-	tp_item item[MAX];
+ item_pilha item[MAX];
 } tp_pilha;
 
 void inicializa_pilha(tp_pilha *p){
@@ -30,36 +31,50 @@ int pilha_cheia(tp_pilha *p){
 	}
 }
 
-int push(tp_pilha *p, tp_item e){
+int push(tp_pilha *p, item_pilha e){
 	if (pilha_cheia(p)==1) return 0;
 	p->topo++;
 	p->item[p->topo]=e;
 	return 1;
 }
 
-int pop(tp_pilha *p, tp_item *e){
+int pop(tp_pilha *p, item_pilha *e){
 	if (pilha_vazia(p)) return 0;
 	*e=p->item[p->topo];
 	p->topo--;
 	return 1;
 }
 
-int top(tp_pilha *p, tp_item *e){
+int top(tp_pilha *p, item_pilha *e){
 	if (pilha_vazia(p)) return 0;
 	*e=p->item[p->topo];
 	return 1;
 }
 
 void imprime_pilha(tp_pilha p){
-    tp_item e;
-	//printf("Pilha impressao\n");
-    //printf("\n");
+    item_pilha e;
+    printf("\nCava: ");
     while (!pilha_vazia(&p)){
         pop(&p, &e);
-        printf("[%d:%d]",e.lado_direito, e.lado_esquerdo /*e.id_peca*/);
+        printf("[%d:%d]",e.lado_esquerdo, e.lado_direito);
     }
 	printf("\n");
+	Sleep(3000);
+	system("cls");
 }
+
+/*void imprime_pilha_jogador(tp_pilha p){
+    item_pilha e;
+
+    printf("\n\n\n Lista de nomes na main:\n\n");
+	printf("id| nome");
+	printf("\n--+---------");
+    while (!pilha_vazia(&p)){
+        pop(&p, &e);
+       	printf("\n%hd | %s",e.id_do_jogador, e.nome);
+    }
+	printf("\n");
+}*/
 
 int altura_pilha(tp_pilha *p){
 	return p->topo+1;
@@ -68,7 +83,7 @@ int altura_pilha(tp_pilha *p){
 /*void retira_impares(tp_pilha *p){
     tp_pilha paux;
 	inicializa_pilha(&paux);
-	tp_item e;
+ item_pilha e;
 	//desempilha a pilha original e armazena apenas os pares na pilha auxiliar
 	while (!pilha_vazia(p))	{
 		pop(p,&e);
@@ -90,7 +105,7 @@ int altura_pilha(tp_pilha *p){
 
 /*
 void retira_impares(tp_pilha *p){
-  tp_item e;
+ item_pilha e;
   tp_pilha paux;
   inicializa_pilha(&paux);
   while (!pilha_vazia(p)) {
@@ -105,8 +120,7 @@ void retira_impares(tp_pilha *p){
 */
 
 
-int pilhas_iguais(tp_pilha p1, tp_pilha p2){
-tp_item e1, e2;
+int pilhas_iguais(tp_pilha p1, tp_pilha p2){ item_pilha e1, e2;
 
 if(altura_pilha(&p1) != altura_pilha(&p2))
    return 0;
@@ -124,7 +138,7 @@ return 1;
 /*3)	Implementar uma fun��o que receba duas pilhas como par�metro 
 e empilhe a segunda sobre a primeira. */ 
 int empilha_pilhas(tp_pilha *p1, tp_pilha *p2){
-	tp_item e;
+ item_pilha e;
 	tp_pilha paux;
 	inicializa_pilha(&paux);
 	if ( altura_pilha(p1)+altura_pilha(p2) > MAX) return 0;	

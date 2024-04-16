@@ -7,27 +7,24 @@
 	-> Andre Lucas do Nascimento dos Santos
 */
 
-#include <stdio.h>
-#include <stdlib.h>
+
 #include "control.h"
 #include "model.h"
-#include "pilha.h"
-
 
 int main() {
     tp_pilha pecas;
     tp_fila jogadores;
+	tp_listad *mesa = inicializa_listad();
 
-    // Inicializando o jogo criando as peças de dominó, embaralhando-as e inicializando a mesa e adicionando os jogadores
+    // Inicializando o jogo criando as peças de dominó, embaralhando-as e inicializando a mesa e adicionando os jogadores*
     configuracao_inicial(&pecas, &jogadores);
-	system("pause");
-	printf("\n\n\n Lista de nomes na main:\n\n");
-	printf("id| nome");
-	printf("\n--+---------");
-	imprime_fila(jogadores);
-	printf("\n\n\n\nPECAS DO JOGO: ");
+
 	imprime_pilha(pecas);
+	//imprime_fila(jogadores);
 
+	printf("jogadores %d | %s", jogadores.ini, jogadores.item[0].nome);
+	//imprime_listad(jogadores.item[jogadores.ini].mao, 1);
+	imprime_dados_totais(&jogadores);
 
-    return 0;
+	return 0;
 }

@@ -1,9 +1,8 @@
-#ifndef __MODEL_H_
-#define __MODEL_H_
+#ifndef __PECA_H_
+#define __PECA_H_
 
 #include <stdio.h>
 #include <stdlib.h>
-
 
 typedef struct{
     int lado_direito; // Valor de um lado da peça  
@@ -12,13 +11,17 @@ typedef struct{
     short int id_jogador; // Para saber quem é o dono dessa peça  
 }peca;
 
+#endif
+
+#ifndef __JOGADOR_H_
+#define __JOGADOR_H_
+
+#include "lista_de.h"
+
 typedef struct {
     char nome[50];
-    short int id_do_jogador; // Para saber de quem é a peça da lista princiapal 
-    //peca mao[7]; //substituir por lista encadeada ou usar a comparação de id's
+    short int id_do_jogador; // Para saber de quem é a peça da lista principal
+    tp_listad *mao; // Declare mao aqui
 }jogador;
-
-typedef struct{
-}mesa;
 
 #endif
