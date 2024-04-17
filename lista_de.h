@@ -13,12 +13,12 @@
 #include <windows.h>
 #include "model.h"
 
-typedef peca item_lista; 
+
 
 //dados estruturado que representa o descritor
 typedef struct tp_no_aux {   
   struct tp_no_aux *ant;  
-  item_lista info;  
+  peca info;  
   struct tp_no_aux *prox;   
 } tp_no; 
 
@@ -52,7 +52,7 @@ tp_no *aloca() {
 }
 
 //insere um novo n� na lista
-int insere_listad_no_fim (tp_listad *lista, item_lista e){   
+int insere_listad_no_fim (tp_listad *lista, peca e){   
   tp_no *novo;   
   novo=aloca();
   if (!novo) return 0;
@@ -100,7 +100,7 @@ void imprime_listad(tp_listad *lista, int ordem) {
 }
 
 //remove um elemento da lista
-int remove_listad (tp_listad *lista, item_lista e){   
+int remove_listad (tp_listad *lista, peca e){   
   tp_no *atu;
   atu = lista->ini;
   while ( (atu != NULL) && (atu->info.id_peca != e.id_peca) ) { 
@@ -130,7 +130,7 @@ int remove_listad (tp_listad *lista, item_lista e){
 }        
 
 //Com base em um conte�do, retorna-se o endere�o do n� que cont�m o conte�do
-tp_no * busca_listade (tp_listad *lista, item_lista e){   
+tp_no * busca_listade (tp_listad *lista, peca e){   
   tp_no *atu;
   atu = lista->ini;
   while ( (atu != NULL) && (atu->info.id_peca != e.id_peca) ) { 

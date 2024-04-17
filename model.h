@@ -8,7 +8,7 @@ typedef struct{
     int lado_direito; // Valor de um lado da peça  
     int lado_esquerdo; // Valor do outro lado da peça  
     short int id_peca; // Para poder embaralhar as peças 
-    short int id_jogador; // Para saber quem é o dono dessa peça  
+    
 }peca;
 
 #endif

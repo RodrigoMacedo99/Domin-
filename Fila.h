@@ -6,10 +6,10 @@
 #include "model.h"
 #define MAX 28
 
-typedef jogador item_jogador;
+
 
 typedef struct {
-    item_jogador item[MAX];
+    jogador item[MAX];
     int ini, fim;
  //   int tam;
 } tp_fila;
@@ -35,7 +35,7 @@ int fila_cheia (tp_fila *f){
     return 0;
 }
 
-int insere_fila (tp_fila *f, item_jogador e){
+int insere_fila (tp_fila *f, jogador e){
     if(fila_cheia(f)) 
         return 0; //Não foi possível adicionar a fila  
     f->fim = proximo(f->fim);
@@ -44,7 +44,7 @@ int insere_fila (tp_fila *f, item_jogador e){
     return 1;
 }
 
-int remove_fila (tp_fila *f, item_jogador *e){
+int remove_fila (tp_fila *f, jogador *e){
     if(fila_vazia(f)) 
         return 0; //Não foi possível remover da fila
     f->ini = proximo(f->ini);
@@ -58,14 +58,14 @@ int remove_fila (tp_fila *f, item_jogador *e){
         printf("Fila vazia\n");
         return;
     }
-    item_jogador e = f->item[f->ini];
+    jogador e = f->item[f->ini];
     printf("Informações do dado no início da fila:\n");
     printf("ID: %hd\n", e.id_do_jogador);
     printf("Nome: %s\n", e.nome);
 }*/
 
 void imprime_fila (tp_fila f){
-    item_jogador e;
+    jogador e;
     printf("\n Nomes dos jogadores:\n\n");
 	printf("id| nome  | mao");
 	printf("\n--+------+---------------------------");
@@ -88,7 +88,7 @@ void imprime_fila (tp_fila f){
  
  int tamanho_fila(tp_fila f){
     short int cont=0;
-	item_jogador e;
+	jogador e;
     while(!fila_vazia(&f)){
         remove_fila(&f, &e);
         cont++;

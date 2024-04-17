@@ -76,7 +76,7 @@ void inicializar_pecas (tp_pilha *pilha_pecas){
 }
 //  libera memoria alocada
 /*void libera_memoria(tp_fila *jogadores) {
-    item_jogador j;
+    jogador j;
     while (!fila_vazia(jogadores)) {
         remove_fila(jogadores, &j);
         // Libera a memória para a mão do jogador
@@ -99,7 +99,7 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
 
     inicializa_fila(fila_jogadores);
     inicializar_jogadores(fila_jogadores, introducao());
-    item_pilha temp;
+    peca temp;
 
 	for (int i = 1; i <= tamanho_fila(*fila_jogadores); i++){
         fila_jogadores->item[fila_jogadores->ini].mao = inicializa_listad();
@@ -116,12 +116,13 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
 
 void imprime_dados_totais(tp_fila *jogadores){
     int i;
-    printf("Entrou.... %x\n", jogadores->ini);
+    printf("Entrou.... %d\n", jogadores->ini);
 	for (i = 1; i <= tamanho_fila(*jogadores); i++){
-        item_jogador j;
+        jogador
+ j;
         j.mao = inicializa_listad();
         printf("%d || %s: ", i, jogadores->item[jogadores->ini].nome);
-        //imprime_listad(jogadores->item[jogadores->ini].mao, 1);
+       //imprime_listad(jogadores->item[jogadores->ini].mao, 1);
         remove_fila(jogadores, &j);
         insere_fila(jogadores, j);
 	}

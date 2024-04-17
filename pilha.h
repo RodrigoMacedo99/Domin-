@@ -7,11 +7,11 @@
 #include "model.h"
 #define MAX 28
 
-typedef peca item_pilha;
+
 
 typedef struct {
 	int topo;
- item_pilha item[MAX];
+ 	peca item[MAX];
 } tp_pilha;
 
 void inicializa_pilha(tp_pilha *p){
@@ -31,28 +31,28 @@ int pilha_cheia(tp_pilha *p){
 	}
 }
 
-int push(tp_pilha *p, item_pilha e){
+int push(tp_pilha *p, peca e){
 	if (pilha_cheia(p)==1) return 0;
 	p->topo++;
 	p->item[p->topo]=e;
 	return 1;
 }
 
-int pop(tp_pilha *p, item_pilha *e){
+int pop(tp_pilha *p, peca *e){
 	if (pilha_vazia(p)) return 0;
 	*e=p->item[p->topo];
 	p->topo--;
 	return 1;
 }
 
-int top(tp_pilha *p, item_pilha *e){
+int top(tp_pilha *p, peca *e){
 	if (pilha_vazia(p)) return 0;
 	*e=p->item[p->topo];
 	return 1;
 }
 
 void imprime_pilha(tp_pilha p){
-    item_pilha e;
+    peca e;
     printf("\nCava: ");
     while (!pilha_vazia(&p)){
         pop(&p, &e);
@@ -64,7 +64,7 @@ void imprime_pilha(tp_pilha p){
 }
 
 /*void imprime_pilha_jogador(tp_pilha p){
-    item_pilha e;
+    peca e;
 
     printf("\n\n\n Lista de nomes na main:\n\n");
 	printf("id| nome");
@@ -83,7 +83,7 @@ int altura_pilha(tp_pilha *p){
 /*void retira_impares(tp_pilha *p){
     tp_pilha paux;
 	inicializa_pilha(&paux);
- item_pilha e;
+ peca e;
 	//desempilha a pilha original e armazena apenas os pares na pilha auxiliar
 	while (!pilha_vazia(p))	{
 		pop(p,&e);
@@ -105,7 +105,7 @@ int altura_pilha(tp_pilha *p){
 
 /*
 void retira_impares(tp_pilha *p){
- item_pilha e;
+ peca e;
   tp_pilha paux;
   inicializa_pilha(&paux);
   while (!pilha_vazia(p)) {
@@ -120,7 +120,7 @@ void retira_impares(tp_pilha *p){
 */
 
 
-int pilhas_iguais(tp_pilha p1, tp_pilha p2){ item_pilha e1, e2;
+int pilhas_iguais(tp_pilha p1, tp_pilha p2){ peca e1, e2;
 
 if(altura_pilha(&p1) != altura_pilha(&p2))
    return 0;
@@ -138,7 +138,7 @@ return 1;
 /*3)	Implementar uma fun��o que receba duas pilhas como par�metro 
 e empilhe a segunda sobre a primeira. */ 
 int empilha_pilhas(tp_pilha *p1, tp_pilha *p2){
- item_pilha e;
+ peca e;
 	tp_pilha paux;
 	inicializa_pilha(&paux);
 	if ( altura_pilha(p1)+altura_pilha(p2) > MAX) return 0;	
