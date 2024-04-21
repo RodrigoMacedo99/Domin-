@@ -7,11 +7,10 @@
 #define MAX 28
 
 
-
 typedef struct {
     jogador item[MAX];
     int ini, fim;
- //   int tam;
+ // int tam;
 } tp_fila;
 
 void inicializa_fila(tp_fila *f) {
@@ -37,10 +36,12 @@ int fila_cheia (tp_fila *f){
 
 int insere_fila (tp_fila *f, jogador e){
     if(fila_cheia(f)) 
-        return 0; //Não foi possível adicionar a fila  
+        return 0; //Não foi possível adicionar a fila
+    /*if (f->item[f->fim].mao != NULL && f->item[f->ini].mao != NULL)
+        f->item[f->fim].mao = inicializa_listad();*/
     f->fim = proximo(f->fim);
     f->item[f->fim]=e;
- //   f->tam++;
+ // f->tam++;
     return 1;
 }
 
@@ -64,17 +65,28 @@ int remove_fila (tp_fila *f, jogador *e){
     printf("Nome: %s\n", e.nome);
 }*/
 
-void imprime_fila (tp_fila f){
-    jogador e;
-    printf("\n Nomes dos jogadores:\n\n");
-	printf("id| nome  | mao");
-	printf("\n--+------+---------------------------");
+//Tamanho da fila
+ int tamanho_fila(tp_fila f){
+    short int cont=0;
+	jogador e;
     while(!fila_vazia(&f)){
         remove_fila(&f, &e);
-        printf("\n%hd | %s ", e.id_do_jogador, e.nome);
-        imprime_listad(f.item[f.ini].mao, 1);
+        cont++;
+    }	
+    return cont;
+ }
+
+//Imprime a fila
+void imprime_fila (tp_fila f){
+    jogador e;
+    e.mao = inicializa_listad();
+    printf("\n Nomes dos jogadores:\n\n");
+	printf("id| nome  | mao");
+	printf("\n--+------+---------------------------\n");
+    for(int i = 0; i <= tamanho_fila(f)-1; i++){
+        printf("%hd | %s | ", f.item[i].id_do_jogador, f.item[i].nome);
+        imprime_listad(f.item[i].mao, 1);
     }
-    printf("\n\n\n\n");
     system("pause");
     system("cls");
 }
@@ -86,18 +98,28 @@ void imprime_fila (tp_fila f){
 	return MAX - 1 - f->ini + f->fim + 1;
  }*/
  
- int tamanho_fila(tp_fila f){
-    short int cont=0;
-	jogador e;
-    while(!fila_vazia(&f)){
-        remove_fila(&f, &e);
-        cont++;
-    }	
-    return cont;
- }
+
 /*  
 int tamanho_fila2(tp_fila *f){
    return f->tam;	
+}*/
+
+//  libera memoria alocada
+/*void libera_memoria(tp_fila *jogadores) {
+    jogador j;
+    while (!fila_vazia(jogadores)) {
+        remove_fila(jogadores, &j);
+        // Libera a memória para a mão do jogador
+        tp_listad *atu = j.mao;
+        tp_listad *p;
+        while (atu != NULL) {
+            p = atu->fim;
+            free(atu);
+            atu = p;
+        }
+        // Libera a memória para a estrutura do jogador
+        free(j.mao); // assumindo que j.mao foi alocado dinamicamente
+    }
 }*/
 
 #endif // FILA_H

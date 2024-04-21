@@ -7,8 +7,6 @@
 #include "model.h"
 #define MAX 28
 
-
-
 typedef struct {
 	int topo;
  	peca item[MAX];

@@ -21,7 +21,7 @@ typedef struct{
 typedef struct {
     char nome[50];
     short int id_do_jogador; // Para saber de quem é a peça da lista principal
-    tp_listad *mao; // Declare mao aqui
+    tp_listad *mao;// Declare mao aqui
 }jogador;
 
 #endif

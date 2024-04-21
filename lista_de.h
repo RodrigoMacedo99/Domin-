@@ -95,8 +95,6 @@ void imprime_listad(tp_listad *lista, int ordem) {
      }
 	}
     printf("\n");
-    Sleep(1000);
-    system("cls");
 }
 
 //remove um elemento da lista
@@ -151,4 +149,9 @@ tp_listad * destroi_listad (tp_listad *lista){
   return NULL;
 }
 
+
+peca primeiro_elemento(tp_listad *lista){
+  if (lista != NULL && lista->ini != NULL)
+    return lista->ini->info;
+}
 #endif
