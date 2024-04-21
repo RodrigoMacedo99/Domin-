@@ -100,4 +100,15 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
     separa_pecas_jogadores(fila_jogadores, pilha_pecas);
 }
 
+// Função para jogar uma peça
+/*void jogar_peca(tp_fila *jogador, tp_listad *mesa, int vez){
+    peca p;
+    remover_listad(jogador->item[vez].mao, p);
+
+    if (p.lado_direito ==  mesa->fim->info.lado_esquerdo){
+        insere_listad_no_fim(mesa, p);
+    }else if (p.lado_esquerdo ==  mesa->ini->info.lado_direito){
+        insere_listad_no_inicio(mesa, p);
+    }
+}  */
 #endif

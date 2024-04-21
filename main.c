@@ -18,11 +18,14 @@ int main() {
     tp_fila jogadores;
 	tp_listad *mesa = inicializa_listad();
 
-    // Inicializando o jogo criando as peças de dominó, embaralhando-as e inicializando a mesa e adicionando os jogadores*
-    configuracao_inicial(&pecas, &jogadores);
+	if(menu() == 1){	
+		  // Inicializando o jogo criando as peças de dominó, embaralhando-as e inicializando a mesa e adicionando os jogadores*
+    	configuracao_inicial(&pecas, &jogadores);
 
-	imprime_pilha(pecas);
-	imprime_fila(jogadores);
+		imprime_pilha(pecas);
+		imprime_fila(jogadores);
+	}
+  
 
 	return 0;
 }
