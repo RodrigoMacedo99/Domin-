@@ -21,8 +21,8 @@ O dominó é um jogo antigo e popular, originado na China por volta de 243 a.C.,
 - [x] **Documentação:** Documente o algoritmo com comentários claros para facilitar a compreensão e manutenção do código.
 - [X] **Criação de mão do jogador:** implementar uma estrutura de dados para a criação. 
 
-- [] **implementação de regras do jogo :** codificar as regras de negocio as regras do jogo prioridade ####.
-- [] **interação mão mesa:**  implementar as retiradas e inserções das diferentes estruturas de dados .
+- [] **implementação de regras do jogo :** codificar as regras de negocio as regras do jogo .
+- [] **interação mão mesa:**  implementar as retiradas e inserções das diferentes estruturas de dados prioridade ####.
 - [X]  **Distribuição de pedras nas mão dos jogadores:** destribuir de forma aleatoria as pedras disponiveis no cava .
 - [] **Documentação :**  Seguir boas praticas e descrever o que cada trecho do codigo     faz .
 - [X] **Modularização  :**  Seguir boas praticas e separar bem as responsabilidades de cada função  .
