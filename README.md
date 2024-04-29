@@ -7,7 +7,7 @@
 O dominó é um jogo antigo e popular, originado na China por volta de 243 a.C., composto por 28 peças. Este projeto propõe a implementação de um programa que permita a participação de dois ou quatro jogadores no jogo. O jogo começa com todas as peças embaralhadas e distribuídas entre os jogadores. Cada jogador, em seu turno, escolhe uma peça para colocar em uma das extremidades da sequência na mesa. Caso não tenha uma peça válida, o jogador deve retirar do monte. O jogo encerra quando o primeiro jogador esvaziar sua mão.
 
 <p align="center">
-  <img src="imagens/dominó.png" />
+  <img src="Imagens/dominó.png" />
 </p>
 
 # Como o Programa Funciona?
@@ -15,7 +15,7 @@ O dominó é um jogo antigo e popular, originado na China por volta de 243 a.C.,
 O jogo envolve dois ou quatro jogadores e um conjunto de peças de dominó. Cada peça de dominó tem duas faces com números de 0 a 6. O objetivo do jogo é ser o primeiro jogador a se livrar de todas as suas peças.
 
 <p align="center">
-  <img src="imagens/fluxograma.jpeg" />
+  <img src="Imagens/fluxograma.jpeg" />
 </p>
 
 
