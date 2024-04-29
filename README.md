@@ -30,7 +30,7 @@ O jogo envolve dois ou quatro jogadores e um conjunto de peças de dominó. Cada
    - Cada jogador deve receber 7 peças de dominó.
 
 2. **Colocar a Primeira Peça:**
-   - O jogador que tiver a maior buxa (peça com os dois lados iguais), é definido como o primeiro jogador e a peça é automaticamente anexada na mesa. 
+   - O jogador que tiver a maior bucha (peça com os dois lados iguais), é definido como o primeiro jogador e a peça é automaticamente anexada na mesa. 
 
 ## Jogada dos Jogadors
 
