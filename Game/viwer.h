@@ -57,7 +57,7 @@ int menu(){
 
     int opcao = 0;
 
-    printf("======> ESCOLHA UMA DAS OPÇÕES ABAIXO <=====\n");
+    printf("======> ESCOLHA UMA DAS OPCOES ABAIXO <=====\n");
     printf("|            1 - Iniciar novo Jogo           |\n");
     printf("|             2 - Regras do Jogo             |\n");
     printf("|              3 - Sair do jogo              |\n");
@@ -73,7 +73,7 @@ int menu(){
 int menu_de_jogadas(char jogador){
     int opcao = 0;
 
-    printf("======> ESCOLHA UMA DAS OPÇÕES ABAIXO <======\n");
+    printf("======> ESCOLHA UMA DAS OPCOES ABAIXO <======\n");
     printf("|            1 - Mesa do Domino              |\n");
     printf("|            2 - Ver suas pecas              |\n");
     printf("|             3 - Comprar peca               |\n");
