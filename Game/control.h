@@ -111,4 +111,36 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
         insere_listad_no_inicio(mesa, p);
     }
 }  */
+
+
+ /*// Função para verificar se o jogador pode jogar
+int pode_jogar(tp_listad *mao, tp_listad *mesa){
+    peca p;
+    p = mao->ini->info;
+    if (p.lado_direito ==  mesa->fim->info.lado_esquerdo){
+        return 1;
+    }else if (p.lado_esquerdo ==  mesa->ini->info.lado_direito){
+        return 1;
+    }
+    return 0;
+} */
+/*void rodada_de_jogadores(tp_fila *fila_jogadores, tp_listad *mesa){
+    int numero_de_jogadores = tamanho_fila(*fila_jogadores);
+    for (int vez = 0; vez < numero_de_jogadores; vez++){
+        jogar_peca(fila_jogadores, mesa, vez);
+    }
+}*/
+void print_mao_jogadores(tp_fila *fila_jogadores) {
+    int numero_de_jogadores = tamanho_fila(*fila_jogadores);
+    for (int i = 0; i < numero_de_jogadores; i++) {
+        printf("Jogador %d:\n", i+1);
+        tp_listad *mao = fila_jogadores->item[i].mao;
+        tp_no *atual = mao->ini;
+        while (atual != NULL) {
+            printf("Peca: %d|%d\n", atual->info.lado_esquerdo, atual->info.lado_direito);
+            atual = atual->prox;
+        }
+        printf("\n");
+    }
+}
 #endif
