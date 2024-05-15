@@ -96,7 +96,7 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
     inicializa_pilha(pilha_pecas);
     inicializa_fila(fila_jogadores);
     inicializar_pecas(pilha_pecas);
-    inicializar_jogadores(fila_jogadores, introducao());
+    inicializar_jogadores(fila_jogadores, introducao());//CARALHO AQUI Ó ACHEI FINAMENTE
     separa_pecas_jogadores(fila_jogadores, pilha_pecas);
 }
 
@@ -117,10 +117,12 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
 int pode_jogar(tp_listad *mao, tp_listad *mesa){
     peca p;
     p = mao->ini->info;
-    if (p.lado_direito ==  mesa->fim->info.lado_esquerdo){
+    if (p.lado_direito||p.lado_esquerdo ==  mesa->fim->info.lado_esquerdo||mesa->ini->info.lado_direito){
+        printf(" pode por a peça\n");
         return 1;
-    }else if (p.lado_esquerdo ==  mesa->ini->info.lado_direito){
-        return 1;
+    }else {
+        printf(" não pode por a peça\n");
+        return 0;
     }
     return 0;
 } */
@@ -142,5 +144,9 @@ void print_mao_jogadores(tp_fila *fila_jogadores) {
         }
         printf("\n");
     }
+}
+
+void fechar_programa() {
+    exit(0);
 }
 #endif

@@ -9,7 +9,7 @@
 #include "lista_de.h"
 #include "model.h"
 
-
+//Função de inicialização  retorna a quantidade de jogadores
 int introducao(){
 
     int opcao;
@@ -30,7 +30,8 @@ int introducao(){
 	
     return opcao;
 }
-
+ 
+// de onde a variavel quantidade_jogadores recebe o valor dela 
 void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
 
     jogador jogadores;
@@ -69,7 +70,26 @@ int menu(){
     return opcao;
 }
 
-//menu de jogadas
+int regras_do_jogo(){
+    int opcao ;
+    printf("| 1. O jogo de dominó é jogado por 2 a 4 jogadores.                                                   |\n");
+    printf(" 2. Cada jogador recebe 7 peças.                                                                      |\n");
+    printf(" 3. O jogador que tiver a peça dupla seis começa o jogo.                                              |\n");
+    printf(" 4. O jogador seguinte deve jogar uma peça que tenha um dos lados igual ao da peça que está na mesa.  |\n");
+    printf(" 5. Se um jogador não tiver uma peça para jogar, ele deve comprar uma peça do monte.                  |\n");
+    printf(" 6. O jogo termina quando um jogador coloca todas as suas peças na mesa ou quando o jogo fica bloqueado.\n");
+    printf("deseja voltar ao menu principal? [1] sim [2] nao\n");
+    scanf("%d", &opcao);
+    if(opcao == 1){
+        system("cls");
+        return 1;
+        }else{
+            system("cls");
+            return 0;
+        }
+
+}
+//menu de jogadas// Preciso fazer a entrada que dei com os nomes dos jogadores como entrada para essa função
 int menu_de_jogadas(char jogador){
     int opcao = 0;
 
@@ -85,5 +105,6 @@ int menu_de_jogadas(char jogador){
     system("cls");
     scanf("%d", &opcao);
     return opcao;
+    // e utlizar essa função como entrada para a função de jogar_peca, Mostrar mesa ,comprar peca ver mao e jogar 
 }
 #endif

@@ -25,7 +25,20 @@ int main() {
 		imprime_pilha(pecas);
 		imprime_fila(jogadores);
 	}
-  
+	// fazer elif paras as outras opções do menu
+  else if(menu() == 2){
+      regras_do_jogo();
+	  if (regras_do_jogo()== 1){
+		  main();
+
+    }
+    else if(menu() == 3){
+       fechar_programa();
+    }
+    else{
+		printf("Opção inválida, tente novamente!\n");
+	}
+
 
 	return 0;
 }
