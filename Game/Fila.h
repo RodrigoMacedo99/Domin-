@@ -97,8 +97,6 @@ void imprime_fila (tp_fila f){
 	if (f->ini < f->fim) return f->fim - f->ini;
 	return MAX - 1 - f->ini + f->fim + 1;
  }*/
- 
-
 /*  
 int tamanho_fila2(tp_fila *f){
    return f->tam;	

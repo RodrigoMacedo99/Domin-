@@ -26,7 +26,7 @@ typedef struct tp_no_aux {
 typedef struct {   
   tp_no *ini;   
   tp_no *fim;   
-//  int tamanho;   
+  int tamanho;   
 }tp_listad;
 
 //aloca-se mem�ria para o descritor (explicado no �nicio deste arquivo) e faz o seus ponteiros apontarem para o Nulo
@@ -34,7 +34,7 @@ tp_listad *inicializa_listad(){
    tp_listad *lista=(tp_listad*) malloc(sizeof(tp_listad));   
    lista->ini = NULL;   
    lista->fim = NULL;   
-  // lista->tamanho = 0;   
+   lista->tamanho = 0;   
    return lista;
 }  
 
@@ -51,7 +51,7 @@ tp_no *aloca() {
 	return pt;
 }
 
-//insere um novo n� na lista
+//insere a peça no fim da lista
 int insere_listad_no_fim (tp_listad *lista, peca e){   
   tp_no *novo;   
   novo=aloca();
@@ -68,9 +68,30 @@ int insere_listad_no_fim (tp_listad *lista, peca e){
      lista->fim->prox = novo;
      lista->fim = novo;
      }  
-  //lista->tamanho++;   
+    lista->tamanho++;   
   return 1;   
 }        
+
+// Adicionar peça no inicio da lista 
+int insere_listad_no_ini (tp_listad *lista, peca e){   
+  tp_no *novo;   
+  novo=aloca();
+  if (!novo) return 0;
+  novo->info = e;  
+  if ( listad_vazia(lista) ){ //Se for o primeiro elemento da lista
+     novo->prox = NULL;   
+     novo->ant = NULL; 
+     lista->ini = lista->fim = novo;
+     }  
+  else {
+     novo->prox = lista->ini;   
+     novo->ant = NULL; 
+     lista->ini->ant = novo;
+     lista->ini = novo;
+     }  
+    lista->tamanho++;   
+  return 1;   
+}     
 
 //imprime os conte�dos da lista (de frente para tr�s ou de tr�s pra frente)
 void imprime_listad(tp_listad *lista, int ordem) {
@@ -125,7 +146,44 @@ int remove_listad (tp_listad *lista, peca e){
    free(atu);  
   //lista->tamanho--;   
   return 1;   
-}        
+}    
+
+// Remover a peça com a referencia do ID delas; E retorna os valores das pecas 
+peca remove_listad_id (tp_listad *lista, peca e){   
+  tp_no *atu;
+  atu = lista->ini;
+  peca removido;
+  removido.id_peca = 0;
+
+  while ( (atu != NULL) && (atu->info.id_peca != e.id_peca) ) { 
+        atu=atu->prox;}
+  if ( atu == NULL) return removido;  
+
+  // Copie o elemento para a variável removed antes de liberar a memória
+  removido = atu->info;
+
+  if (lista->ini == lista->fim) { //Se o for o unico elemento da lista
+      lista->ini = lista->fim = NULL; }
+  else {   
+   if (lista->ini == atu) {  //Se for o primeiro elemento da lista
+      lista->ini = atu->prox;
+      atu->prox->ant = NULL;
+      }  
+   else {
+      if (lista->fim == atu) { // se for o último nó da lista
+       lista->fim = atu->ant;
+       atu->ant->prox = NULL;              
+       }
+      else {
+        atu->prox->ant = atu->ant;   
+        atu->ant->prox = atu->prox;
+        } 
+      }
+     }   
+   free(atu);  
+  //lista->tamanho--;   
+  return removido;   
+}
 
 //Com base em um conte�do, retorna-se o endere�o do n� que cont�m o conte�do
 tp_no * busca_listade (tp_listad *lista, peca e){   
@@ -154,4 +212,31 @@ peca primeiro_elemento(tp_listad *lista){
   if (lista != NULL && lista->ini != NULL)
     return lista->ini->info;
 }
+
+//Realizando soma dos dois lados das peças
+int soma_lados(peca peca){
+  int p;
+  p = peca.lado_esquerdo + peca.lado_direito;
+  return p;
+}
+
+//Select Sort aplicado na mao do jogadores
+void select_sort_lista(tp_listad *mao) {
+    tp_no *aux, *aux2, *min;
+
+    for (aux = mao->ini->prox; aux != NULL; aux = aux->prox) {
+        min = aux;
+        for (aux2 = aux->prox; aux2 != NULL; aux2 = aux2->prox) {
+            if (soma_lados(aux2->info) < soma_lados(min->info)) {
+                min = aux2;
+            }
+        }
+        if (min != aux) {
+            peca p = aux->info;
+            aux->info = min->info;
+            min->info = p;
+        }
+    }
+}
+
 #endif
