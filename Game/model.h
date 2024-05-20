@@ -5,8 +5,8 @@
 #include <stdlib.h>
 
 typedef struct{
-    int lado_direito; // Valor de um lado da peça  
-    int lado_esquerdo; // Valor do outro lado da peça  
+    int lado_direito; // Valor do lado direito da peça
+    int lado_esquerdo; // Valor do lado esquerdo da peça 
     short int id_peca; // Para poder embaralhar as peças 
     
 }peca;
@@ -20,8 +20,8 @@ typedef struct{
 
 typedef struct {
     char nome[50];
-    short int id_do_jogador; // Para saber de quem é a peça da lista principal
-    tp_listad *mao;// Declare mao aqui
+    short int id_do_jogador; //id da peça
+    tp_listad *mao;//Lista duplamaente encadeada para colocar a mao dos jogadores
 }jogador;
 
 #endif

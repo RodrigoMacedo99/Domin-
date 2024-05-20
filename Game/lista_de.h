@@ -36,12 +36,12 @@ tp_listad *inicializa_listad(){
    lista->fim = NULL;   
    lista->tamanho = 0;   
    return lista;
-}  
+}
 
 int listad_vazia(tp_listad *lista) {
-	if ( (lista->ini == NULL) ) 
-		return 1;
-	return 0;	
+    if (lista->ini == NULL)
+        return 1;
+    return 0;
 }
 
 //Aloca um n� da lista
@@ -186,12 +186,12 @@ peca remove_listad_id (tp_listad *lista, peca e){
 }
 
 //Com base em um conte�do, retorna-se o endere�o do n� que cont�m o conte�do
-tp_no * busca_listade (tp_listad *lista, peca e){   
+tp_no * busca_listade (tp_listad *lista, peca e){
   tp_no *atu;
   atu = lista->ini;
   while ( (atu != NULL) && (atu->info.id_peca != e.id_peca) ) { 
         atu=atu->prox;}
-  return atu;
+    return atu;
 }        
 
 //Retira da mem�ria todos os n�s da lista e tamb�m o descritor
@@ -215,14 +215,13 @@ peca primeiro_elemento(tp_listad *lista){
 
 //Realizando soma dos dois lados das peças
 int soma_lados(peca peca){
-  int p;
-  p = peca.lado_esquerdo + peca.lado_direito;
-  return p;
+  return peca.lado_esquerdo + peca.lado_direito;
 }
 
 //Select Sort aplicado na mao do jogadores
 void select_sort_lista(tp_listad *mao) {
     tp_no *aux, *aux2, *min;
+    short int i = 0;
 
     for (aux = mao->ini->prox; aux != NULL; aux = aux->prox) {
         min = aux;
@@ -235,6 +234,7 @@ void select_sort_lista(tp_listad *mao) {
             peca p = aux->info;
             aux->info = min->info;
             min->info = p;
+            min->info.id_peca = i+1; //alterar o id da peça
         }
     }
 }

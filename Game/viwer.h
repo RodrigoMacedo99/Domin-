@@ -31,7 +31,7 @@ int introducao(){
     return opcao;
 }
  
-// de onde a variavel quantidade_jogadores recebe o valor dela 
+// Função para inicializar os jogadores
 void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
 
     jogador jogadores;
@@ -44,14 +44,12 @@ void inicializar_jogadores (tp_fila *fila_jogadores, int quantidade_jogadores){
         printf("\n Digite o nome do jogador %d: ", i);
         scanf("%s", jogadores.nome);
         insere_fila(fila_jogadores, jogadores);
-        fflush(stdin);
     }
     printf("\n\nJogadores cadastrados com sucesso!\n\n");
+    Sleep(2000);
+    system("cls");
 }
 
-void jogar_peca(){
-
-}
 
 //Função de controle do jogo
 int menu(){
@@ -70,41 +68,119 @@ int menu(){
     return opcao;
 }
 
+//Função para mostrar as regras do jogo
 int regras_do_jogo(){
     int opcao ;
-    printf("| 1. O jogo de dominó é jogado por 2 a 4 jogadores.                                                   |\n");
-    printf(" 2. Cada jogador recebe 7 peças.                                                                      |\n");
-    printf(" 3. O jogador que tiver a peça dupla seis começa o jogo.                                              |\n");
-    printf(" 4. O jogador seguinte deve jogar uma peça que tenha um dos lados igual ao da peça que está na mesa.  |\n");
-    printf(" 5. Se um jogador não tiver uma peça para jogar, ele deve comprar uma peça do monte.                  |\n");
-    printf(" 6. O jogo termina quando um jogador coloca todas as suas peças na mesa ou quando o jogo fica bloqueado.\n");
-    printf("deseja voltar ao menu principal? [1] sim [2] nao\n");
+    printf("============================================> REGRAS DO JOGO <============================================\n");
+    printf("| 1. O jogo de domino e jogado por 2 a 4 jogadores.                                                      |\n");
+    printf("| 2. Cada jogador recebe 7 pecas.                                                                        |\n");
+    printf("| 3. O jogador que tiver a peca dupla seis comeca o jogo.                                                |\n");
+    printf("| 4. O jogador seguinte deve jogar uma peca que tenha um dos lados igual ao da peca que esta na mesa.    |\n");
+    printf("| 5. Se um jogador nao tiver uma peca para jogar, ele deve comprar uma peca do monte.                    |\n");
+    printf("| 6. O jogo termina quando um jogador coloca todas as suas pecas na mesa ou quando o jogo fica bloqueado.|\n");
+    printf("==========================================================================================================\n\n");
+    printf("Deseja voltar ao menu principal? [1] sim [2] nao\n");
     scanf("%d", &opcao);
+
     if(opcao == 1){
         system("cls");
         return 1;
-        }else{
+        }else if(opcao == 2){
             system("cls");
-            return 0;
+            regras_do_jogo();
+        }else if (opcao != 1 || opcao != 2){
+            system("cls"); 
+            printf("Opcao invalida, tente novamente!\n");
+            regras_do_jogo();
         }
 
 }
+
+// Função para mostrar a mão do jogador
+void print_mesa(tp_listad *mao){
+    printf("Mesa: "); 
+    imprime_listad(mao, 1);
+}
+
+//  Função para escolher a peça que deseja jogar
+void escolher_peca(int *id_peca){
+    printf("Digite o id da peca que deseja jogar: \n");
+    printf("> ");
+    scanf("%d", &id_peca);
+} 
+
+// Função para escolher a posição da peça na mesa
+void posicao_peca_mesa(int *posicao_peca){
+    printf("Digite a posicao que deseja jogar a peca <-[1] ou [2]-> : \n");
+    printf("> ");
+    scanf("%d", &posicao_peca);
+}
+
 //menu de jogadas// Preciso fazer a entrada que dei com os nomes dos jogadores como entrada para essa função
-int menu_de_jogadas(char jogador){
+int menu_de_jogadas(){
     int opcao = 0;
 
+    //printf("                 [ %s ]\n\n", jogador);
     printf("======> ESCOLHA UMA DAS OPCOES ABAIXO <======\n");
     printf("|            1 - Mesa do Domino              |\n");
     printf("|            2 - Ver suas pecas              |\n");
     printf("|             3 - Comprar peca               |\n");
     printf("|                4 - Jogar                   |\n");
-    printf("|        5 - Voltar ao Menu Principal        |\n");
+    printf("|      5 - Sair|Voltar ao Menu Principal     |\n");
     printf("=============================================\n");
     printf("> ");
     
-    system("cls");
     scanf("%d", &opcao);
+    system("cls");
     return opcao;
     // e utlizar essa função como entrada para a função de jogar_peca, Mostrar mesa ,comprar peca ver mao e jogar 
+}
+
+// inicialização do jogo
+void logo(){
+    printf("Projeto: Jogo de domino\n");
+    printf("Materia: Algoritmo e Estrutura de Dados\n");
+    printf("Docente: Marcio Soussa\n");
+    printf("Dicentes:\n");
+    printf("-> Rodrigo de Jesus Macedo\n");
+    printf("-> Andre Lucas do Nascimento dos Santos\n");
+
+    //logo do jogo em ascii
+    printf(" .----------------.  .----------------.  .----------------.  .----------------.  .-----------------. .----------------. \n");  
+    printf("| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n");  
+    printf("| |  ________    | || |     ____     | || | ____    ____ | || |     _____    | || | ____  _____  | || |     ____     | |\n");  
+    printf("| | |_   ___ `.  | || |   .'    `.   | || ||_   \\  /   _|| || |    |_   _|   | || ||_   \\|_   _| | || |   .'    `.   | |\n");  
+    printf("| |   | |   `. \\ | || |  /  .--.  \\  | || |  |   \\/   |  | || |      | |     | || |  |   \\ | |   | || |  /  .--.  \\  | |\n");  
+    printf("| |   | |    | | | || |  | |    | |  | || |  | |\\  /| |  | || |      | |     | || |  | |\\ \\| |   | || |  | |    | |  | |\n");  
+    printf("| |  _| |___.' / | || |  \\  `--'  /  | || | _| |_\\/_| |_ | || |     _| |_    | || | _| |_\\   |_  | || |  \\  `--'  /  | |\n");  
+    printf("| | |________.'  | || |   `.____.'   | || ||_____||_____|| || |    |_____|   | || ||_____||\\____| | || |   `.____.'   | |\n");  
+    printf("| |              | || |              | || |              | || |              | || |              | || |              | |\n");  
+    printf("| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n");  
+    printf(" '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n");  
+
+    Sleep(5000);
+    system("color 0A");
+    system("cls");
+    system("cls");
+}
+
+// Menssagem ao fechar jogo
+void fechar_jogo(){
+	printf("                                               Obrigado por jogar!\n");
+	printf("                                     Espero que joguemos outra partida no futuro\n");
+
+    printf(" .----------------.  .----------------.  .----------------.  .----------------.  .-----------------. .----------------. \n");  
+    printf("| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n");  
+    printf("| |  ________    | || |     ____     | || | ____    ____ | || |     _____    | || | ____  _____  | || |     ____     | |\n");  
+    printf("| | |_   ___ `.  | || |   .'    `.   | || ||_   \\  /   _|| || |    |_   _|   | || ||_   \\|_   _| | || |   .'    `.   | |\n");  
+    printf("| |   | |   `. \\ | || |  /  .--.  \\  | || |  |   \\/   |  | || |      | |     | || |  |   \\ | |   | || |  /  .--.  \\  | |\n");  
+    printf("| |   | |    | | | || |  | |    | |  | || |  | |\\  /| |  | || |      | |     | || |  | |\\ \\| |   | || |  | |    | |  | |\n");  
+    printf("| |  _| |___.' / | || |  \\  `--'  /  | || | _| |_\\/_| |_ | || |     _| |_    | || | _| |_\\   |_  | || |  \\  `--'  /  | |\n");  
+    printf("| | |________.'  | || |   `.____.'   | || ||_____||_____|| || |    |_____|   | || ||_____||\\____| | || |   `.____.'   | |\n");  
+    printf("| |              | || |              | || |              | || |              | || |              | || |              | |\n");  
+    printf("| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n");  
+    printf(" '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n");  
+
+	exit(0);
 }
 #endif

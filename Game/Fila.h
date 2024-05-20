@@ -80,10 +80,9 @@ int remove_fila (tp_fila *f, jogador *e){
 void imprime_fila (tp_fila f){
     jogador e;
     e.mao = inicializa_listad();
-    printf("\n Nomes dos jogadores:\n\n");
-	printf("id| nome  | mao");
-	printf("\n--+------+---------------------------\n");
-    for(int i = 0; i <= tamanho_fila(f)-1; i++){
+    printf("id| nome  | mao");
+    printf("\n--+------+---------------------------\n");
+    for(int i = 0; i < tamanho_fila(f); i++){
         printf("%hd | %s | ", f.item[i].id_do_jogador, f.item[i].nome);
         imprime_listad(f.item[i].mao, 1);
     }
