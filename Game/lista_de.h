@@ -209,10 +209,10 @@ tp_listad * destroi_listad (tp_listad *lista){
 }
 
 //Retorna o primeiro elemento da lista
-peca primeiro_elemento(tp_listad *lista){
+/*peca primeiro_elemento(tp_listad *lista){
   if (lista != NULL && lista->ini != NULL)
     return lista->ini->info;
-}
+}*/
 
 //Realizando soma dos dois lados das peças
 int soma_lados(peca peca){

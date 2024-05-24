@@ -177,6 +177,12 @@ int mao_para_mesa (tp_listad *mao, tp_listad *mesa, short int id_peca){
         return 1; 
     }
 
+    // Verifica se a peça existe na mão do jogador
+    if (busca_listade(mao, p) == NULL) {
+        printf("A peca com id %d nao existe na mao.\n", id_peca);
+        return 1;
+    }
+
     // Busca a peça na mão pelo id
     p = buscar_peca(mao, id_peca);
 
@@ -232,7 +238,7 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
 void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
     int vez = 0;  
     short int id_peca;
-    int posicao_peca, verificar_jogada; 
+    int verificar_jogada; 
 
     // Verificar se a mesa está vazia e inicializá-la se necessário
     if(mesa->ini != NULL && mesa->fim != NULL){
@@ -244,6 +250,7 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
     // Loop principal do jogo
     while(1){
         do{
+            printf("                  [ %s ]\n", jogadores->item[vez].nome);
             switch (menu_de_jogadas()){
                 case 1:
                     // Printar mesa
@@ -262,6 +269,7 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
                     if (comprar_peca(cava, jogadores->item[vez].mao) != 0) {
                         printf("Falha ao comprar peça.\n");
                     }
+                    print_mesa(mesa);
                     printar_mao_jogador(jogadores, vez);
                     system("pause");
                     system("cls");
@@ -294,7 +302,6 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
         // Muda a vez do jogador para o próximo
         vez++;
         if(vez == tamanho_fila(*jogadores)) vez = 0;
-        printf("Tamanho da fila: %d\n", tamanho_fila(*jogadores));
     }
 }
 

@@ -89,28 +89,10 @@ void imprime_fila (tp_fila f){
 }
 
 // Duas opções de código do tamanho_fila     
-int tamanho_fila(tp_fila *f){
+/*int tamanho_fila(tp_fila *f){
 	if (fila_vazia(f)) return 0;
 	if (f->ini < f->fim) return f->fim - f->ini;
 	return MAX - 1 - f->ini + f->fim + 1;
- }  
-
-//  libera memoria alocada
-void libera_memoria(tp_fila *jogadores) {
-    jogador j;
-    while (!fila_vazia(jogadores)) {
-        remove_fila(jogadores, &j);
-        // Libera a memória para a mão do jogador
-        tp_listad *atu = j.mao;
-        tp_listad *p;
-        while (atu != NULL) {
-            p = atu->fim;
-            free(atu);
-            atu = p;
-        }
-        // Libera a memória para a estrutura do jogador
-        free(j.mao);
-    }
-}
+ }*/  
 
 #endif // FILA_H

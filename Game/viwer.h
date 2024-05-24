@@ -93,7 +93,6 @@ int regras_do_jogo(){
             printf("Opcao invalida, tente novamente!\n");
             regras_do_jogo();
         }
-
 }
 
 // Função para mostrar a mão do jogador
@@ -113,7 +112,6 @@ void escolher_peca(short int *id_peca){
 int menu_de_jogadas(){
     int opcao = 0;
 
-    //printf("                 [ %s ]\n\n", jogador);
     printf("======> ESCOLHA UMA DAS OPCOES ABAIXO <======\n");
     printf("|            1 - Mesa do Domino              |\n");
     printf("|            2 - Ver suas pecas              |\n");

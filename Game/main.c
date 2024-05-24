@@ -17,7 +17,7 @@ int main() {
 	tp_listad *mesa;
 	mesa = inicializa_listad();
 	
-	//Logo do jogo
+	// Logo do jogo
 	logo();
 
     //Menu do jogo
@@ -27,7 +27,6 @@ int main() {
 		case 1:
             // Inicializando o jogo
 			configuracao_inicial(&pecas, &jogadores);
-
 			// Jogo
             jogo(&jogadores, mesa, &pecas);
 			break;
