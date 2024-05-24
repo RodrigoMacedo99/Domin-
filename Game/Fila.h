@@ -89,11 +89,11 @@ void imprime_fila (tp_fila f){
 }
 
 // Duas opções de código do tamanho_fila     
-int tamanho_fila(tp_fila *f){
+/*int tamanho_fila(tp_fila *f){
 	if (fila_vazia(f)) return 0;
 	if (f->ini < f->fim) return f->fim - f->ini;
 	return MAX - 1 - f->ini + f->fim + 1;
- }  
+ }*/  
 
 //  libera memoria alocada
 void libera_memoria(tp_fila *jogadores) {
