@@ -98,23 +98,28 @@ int regras_do_jogo(){
 
 // Função para mostrar a mão do jogador
 void print_mesa(tp_listad *mao){
-    printf("Mesa: "); 
+    printf("=============== Mesa ================\n");
     imprime_listad(mao, 1);
 }
 
 //  Função para escolher a peça que deseja jogar
-void escolher_peca(int *id_peca){
+void escolher_peca(short int *id_peca){
     printf("Digite o id da peca que deseja jogar: \n");
     printf("> ");
-    scanf("%d", &id_peca);
+    scanf("%hd", id_peca);
 } 
 
 // Função para escolher a posição da peça na mesa
-void posicao_peca_mesa(int *posicao_peca){
-    printf("Digite a posicao que deseja jogar a peca <-[1] ou [2]-> : \n");
+/*int posicao_peca_mesa(){
+    char linha[256];
+    short int id_peca;
+
+    printf("Digite o id da peca que deseja jogar: \n");
     printf("> ");
-    scanf("%d", &posicao_peca);
-}
+    fgets(linha, sizeof(linha), stdin);
+    sscanf(linha, "%hd", &id_peca);
+    return id_peca;
+}*/
 
 //menu de jogadas// Preciso fazer a entrada que dei com os nomes dos jogadores como entrada para essa função
 int menu_de_jogadas(){

@@ -55,7 +55,7 @@ tp_no *aloca() {
 int insere_listad_no_fim (tp_listad *lista, peca e){   
   tp_no *novo;   
   novo=aloca();
-  if (!novo) return 0;
+  if (!novo) return 1;
   novo->info = e;  
   if ( listad_vazia(lista) ){ //Se for o primeiro elemento da lista
      novo->prox = NULL;   
@@ -69,14 +69,14 @@ int insere_listad_no_fim (tp_listad *lista, peca e){
      lista->fim = novo;
      }  
     lista->tamanho++;   
-  return 1;   
+  return 0;   
 }        
 
 // Adicionar peça no inicio da lista 
 int insere_listad_no_ini (tp_listad *lista, peca e){   
   tp_no *novo;   
   novo=aloca();
-  if (!novo) return 0;
+  if (!novo) return 1;
   novo->info = e;  
   if ( listad_vazia(lista) ){ //Se for o primeiro elemento da lista
      novo->prox = NULL;   
@@ -90,7 +90,7 @@ int insere_listad_no_ini (tp_listad *lista, peca e){
      lista->ini = novo;
      }  
     lista->tamanho++;   
-  return 1;   
+  return 0;   
 }     
 
 //imprime os conte�dos da lista (de frente para tr�s ou de tr�s pra frente)
@@ -119,34 +119,35 @@ void imprime_listad(tp_listad *lista, int ordem) {
 }
 
 //remove um elemento da lista
-int remove_listad (tp_listad *lista, peca e){   
+int remove_listad(tp_listad *lista, peca e) {
   tp_no *atu;
   atu = lista->ini;
-  while ( (atu != NULL) && (atu->info.id_peca != e.id_peca) ) { 
-        atu=atu->prox;}
-  if ( atu == NULL) return 0;  
-  if (lista->ini == lista->fim) { //Se o for o unico elemento da lista
-      lista->ini = lista->fim = NULL; }
-  else {   
-   if (lista->ini == atu) {  //Se for o primeiro elemento da lista
+  while ((atu != NULL) && (atu->info.id_peca != e.id_peca)) {
+    atu = atu->prox;
+  }
+  if (atu == NULL) {
+    return 1; // Falha: elemento não encontrado
+  }
+  if (lista->ini == lista->fim) { // Se for o único elemento da lista
+    lista->ini = lista->fim = NULL;
+  } else {
+    if (lista->ini == atu) { // Se for o primeiro elemento da lista
       lista->ini = atu->prox;
       atu->prox->ant = NULL;
-      }  
-   else {
-      if (lista->fim == atu) { // se for o �ltimo n� da lista
-       lista->fim = atu->ant;
-       atu->ant->prox = NULL;              
-       }
-      else {
-        atu->prox->ant = atu->ant;   
+    } else {
+      if (lista->fim == atu) { // Se for o último nó da lista
+        lista->fim = atu->ant;
+        atu->ant->prox = NULL;
+      } else {
+        atu->prox->ant = atu->ant;
         atu->ant->prox = atu->prox;
-        } 
       }
-     }   
-   free(atu);  
-  //lista->tamanho--;   
-  return 1;   
-}    
+    }
+  }
+  free(atu);
+  lista->tamanho--;
+  return 0; // Sucesso: elemento removido
+}
 
 // Remover a peça com a referencia do ID delas; E retorna os valores das pecas 
 peca remove_listad_id (tp_listad *lista, peca e){   
@@ -206,7 +207,6 @@ tp_listad * destroi_listad (tp_listad *lista){
   free(lista);
   return NULL;
 }
-
 
 peca primeiro_elemento(tp_listad *lista){
   if (lista != NULL && lista->ini != NULL)

@@ -78,8 +78,6 @@ int remove_fila (tp_fila *f, jogador *e){
 
 //Imprime a fila
 void imprime_fila (tp_fila f){
-    jogador e;
-    e.mao = inicializa_listad();
     printf("id| nome  | mao");
     printf("\n--+------+---------------------------\n");
     for(int i = 0; i < tamanho_fila(f); i++){
