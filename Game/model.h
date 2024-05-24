@@ -19,9 +19,9 @@ typedef struct{
 #include "lista_de.h"
 
 typedef struct {
-    char nome[50];
+    char nome[50]; //Nome do jogador
     short int id_do_jogador; //id da peça
-    tp_listad *mao;//Lista duplamaente encadeada para colocar a mao dos jogadores
+    tp_listad *mao; //Lista duplamaente encadeada para colocar a mao dos jogadores
 }jogador;
 
 #endif

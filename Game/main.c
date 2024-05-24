@@ -25,14 +25,10 @@ int main() {
 		switch (menu())
 		{
 		case 1:
-            // Inicializando o jogo criando as peças de dominó, embaralhando-as e inicializando a mesa e adicionando os jogadores
+            // Inicializando o jogo
 			configuracao_inicial(&pecas, &jogadores);
-			//imprime_pilha(pecas);
-			//printf("mao dos jogadores: \n");
-			//imprime_listad(jogadores.item[0].mao, 1);
-			//imprime_listad(jogadores.item[1].mao, 2);
-			//printf("liata: %d\n", jogadores.item[1].mao->tamanho);
-			// Função jogo, o coração do do código 
+
+			// Jogo
             jogo(&jogadores, mesa, &pecas);
 			break;
 		case 2:

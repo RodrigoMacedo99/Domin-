@@ -26,7 +26,7 @@ typedef struct tp_no_aux {
 typedef struct {   
   tp_no *ini;   
   tp_no *fim;   
-  int tamanho;   
+  //int tamanho;   
 }tp_listad;
 
 //aloca-se mem�ria para o descritor (explicado no �nicio deste arquivo) e faz o seus ponteiros apontarem para o Nulo
@@ -34,10 +34,11 @@ tp_listad *inicializa_listad(){
    tp_listad *lista=(tp_listad*) malloc(sizeof(tp_listad));   
    lista->ini = NULL;   
    lista->fim = NULL;   
-   lista->tamanho = 0;   
+   //lista->tamanho = 0;   
    return lista;
 }
 
+//verifica se a lista est� vazia
 int listad_vazia(tp_listad *lista) {
     if (lista->ini == NULL)
         return 1;
@@ -68,7 +69,7 @@ int insere_listad_no_fim (tp_listad *lista, peca e){
      lista->fim->prox = novo;
      lista->fim = novo;
      }  
-    lista->tamanho++;   
+    //lista->tamanho++;   
   return 0;   
 }        
 
@@ -89,7 +90,7 @@ int insere_listad_no_ini (tp_listad *lista, peca e){
      lista->ini->ant = novo;
      lista->ini = novo;
      }  
-    lista->tamanho++;   
+    //lista->tamanho++;   
   return 0;   
 }     
 
@@ -145,7 +146,7 @@ int remove_listad(tp_listad *lista, peca e) {
     }
   }
   free(atu);
-  lista->tamanho--;
+  //lista->tamanho--;
   return 0; // Sucesso: elemento removido
 }
 
@@ -160,18 +161,17 @@ peca remove_listad_id (tp_listad *lista, peca e){
         atu=atu->prox;}
   if ( atu == NULL) return removido;  
 
-  // Copie o elemento para a variável removed antes de liberar a memória
   removido = atu->info;
 
-  if (lista->ini == lista->fim) { //Se o for o unico elemento da lista
+  if (lista->ini == lista->fim) { 
       lista->ini = lista->fim = NULL; }
   else {   
-   if (lista->ini == atu) {  //Se for o primeiro elemento da lista
+   if (lista->ini == atu) {  
       lista->ini = atu->prox;
       atu->prox->ant = NULL;
       }  
    else {
-      if (lista->fim == atu) { // se for o último nó da lista
+      if (lista->fim == atu) {
        lista->fim = atu->ant;
        atu->ant->prox = NULL;              
        }
@@ -208,6 +208,7 @@ tp_listad * destroi_listad (tp_listad *lista){
   return NULL;
 }
 
+//Retorna o primeiro elemento da lista
 peca primeiro_elemento(tp_listad *lista){
   if (lista != NULL && lista->ini != NULL)
     return lista->ini->info;

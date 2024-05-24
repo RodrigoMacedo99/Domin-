@@ -109,18 +109,6 @@ void escolher_peca(short int *id_peca){
     scanf("%hd", id_peca);
 } 
 
-// Função para escolher a posição da peça na mesa
-/*int posicao_peca_mesa(){
-    char linha[256];
-    short int id_peca;
-
-    printf("Digite o id da peca que deseja jogar: \n");
-    printf("> ");
-    fgets(linha, sizeof(linha), stdin);
-    sscanf(linha, "%hd", &id_peca);
-    return id_peca;
-}*/
-
 //menu de jogadas// Preciso fazer a entrada que dei com os nomes dos jogadores como entrada para essa função
 int menu_de_jogadas(){
     int opcao = 0;
