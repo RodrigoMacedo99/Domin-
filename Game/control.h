@@ -249,7 +249,7 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
 
 // Função para jogar o jogo
 void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
-    int vez = 0;  
+    int vez = 0, cavada = 0;  
     short int id_peca;
     int verificar_jogada; 
 
@@ -278,12 +278,28 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
                     system("cls");
                     break;
                 case 3:
+                     // Verifica se já cavou nessa rodada
+                    if(cavada == 1){
+                        verificar_jogada = 0;
+                        system("cls");
+                        printf("Voce ja cavou nessa rodada\n");
+                        printf("    Passou a vez :(\n");
+                        Sleep(3000);
+                        system("cls");
+                        break;
+                    }
+
                     // Comprar peça
                     if (comprar_peca(cava, jogadores->item[vez].mao) != 0) {
+                        system("cls");
                         printf("Falha ao comprar peça.\n");
+                        printf("\n\n\n");
                     }
+
+                    cavada++;
                     print_mesa(mesa);
                     printar_mao_jogador(jogadores, vez);
+
                     system("pause");
                     system("cls");
                     break;
@@ -299,6 +315,7 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
 
                         // Verifica se a peça existe na mão do jogador
                         if (verificar_jogada != 0) {
+                            system("cls");
                             printf("\nJogada invalida\n");
                             Sleep(2000);
                         }
@@ -317,21 +334,30 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
                     system("cls");
                     break;
             }
-            
-        // Organiza as peças do jogador
-        organizar_pecas_jogador(jogadores);
+
+            // Organiza as peças do jogador
+            organizar_pecas_jogador(jogadores);
+                    // Verifica se o jogo acabou
+            if(verificar_jogo(jogadores->item[vez].mao)){
+                system("cls");
+                printf("                       Parabens %s, voce venceu!\n", jogadores->item[vez].nome);
+                venceu();
+                Sleep(5000);
+                system("cls");
+                return;
+            }else if(pilha_vazia(cava) && verificar_jogo(jogadores->item[vez].mao)){
+                system("cls");
+                printf("                       Empate!\n");
+                venceu();
+                Sleep(5000);
+                system("cls");
+                return;
+            }
 
         } while(verificar_jogada != 0);
 
-        // Verifica se o jogo acabou
-        if(verificar_jogo(jogadores->item[vez].mao)){
-            system("cls");
-            printf("                       Parabens %s, voce venceu!\n", jogadores->item[vez].nome);
-            venceu();
-            Sleep(5000);
-            system("cls");
-            return;
-        };
+        //zera contagem de cavadas
+        cavada = 0;
 
         // Muda a vez do jogador para o próximo
         vez++;
