@@ -57,7 +57,8 @@ void imprime_pilha(tp_pilha p){
         printf("[%d:%d]",e.lado_esquerdo, e.lado_direito);
     }
 	printf("\n");
-	Sleep(3000);
+	//Sleep(3000);
+	system("pause");
 	system("cls");
 }
 
@@ -151,30 +152,4 @@ int empilha_pilhas(tp_pilha *p1, tp_pilha *p2){
 	return 1;
 }
 
-/*
------ teste.c
-
-#include "pilha.h"
-int main() {
-	tp_pilha pilha1, pilha2;
-	inicializa_pilha(&pilha1);
-	inicializa_pilha(&pilha2);
-	push(&pilha1, 1);
-	push(&pilha1, 2);
-	push(&pilha1, 3);	
-	push(&pilha2, 4);
-	push(&pilha2, 5);
-	push(&pilha2, 6);	
-	imprime_pilha(pilha1);
-	imprime_pilha(pilha2);
-	empilha_pilha(&pilha1, &pilha2);
-	imprime_pilha(pilha1);
-	imprime_pilha(pilha2);
-	return 0;
-}
-
-//4)	Exerc�cio - Balan�o de par�nteses I - 1068 (URI)
-
-*/
 #endif
-
