@@ -93,7 +93,6 @@ int regras_do_jogo(){
             printf("Opcao invalida, tente novamente!\n");
             regras_do_jogo();
         }
-
 }
 
 // Função para mostrar a mão do jogador
@@ -103,17 +102,23 @@ void print_mesa(tp_listad *mao){
 }
 
 //  Função para escolher a peça que deseja jogar
-void escolher_peca(short int *id_peca){
+int escolher_peca(short int *id_peca){
     printf("Digite o id da peca que deseja jogar: \n");
     printf("> ");
     scanf("%hd", id_peca);
+    if(*id_peca < 0 || *id_peca > 27){
+        printf("Opcao invalida, tente novamente!\n");
+        Sleep(2000);
+        system("cls");
+        return 1;
+    }
+    return 0;
 } 
 
 //menu de jogadas// Preciso fazer a entrada que dei com os nomes dos jogadores como entrada para essa função
 int menu_de_jogadas(){
     int opcao = 0;
 
-    //printf("                 [ %s ]\n\n", jogador);
     printf("======> ESCOLHA UMA DAS OPCOES ABAIXO <======\n");
     printf("|            1 - Mesa do Domino              |\n");
     printf("|            2 - Ver suas pecas              |\n");

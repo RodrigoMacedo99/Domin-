@@ -26,7 +26,7 @@ typedef struct tp_no_aux {
 typedef struct {   
   tp_no *ini;   
   tp_no *fim;   
-  //int tamanho;   
+  int tamanho;   
 }tp_listad;
 
 //aloca-se mem�ria para o descritor (explicado no �nicio deste arquivo) e faz o seus ponteiros apontarem para o Nulo
@@ -34,7 +34,7 @@ tp_listad *inicializa_listad(){
    tp_listad *lista=(tp_listad*) malloc(sizeof(tp_listad));   
    lista->ini = NULL;   
    lista->fim = NULL;   
-   //lista->tamanho = 0;   
+   lista->tamanho = 0;   
    return lista;
 }
 
@@ -69,7 +69,7 @@ int insere_listad_no_fim (tp_listad *lista, peca e){
      lista->fim->prox = novo;
      lista->fim = novo;
      }  
-    //lista->tamanho++;   
+    lista->tamanho++;   
   return 0;   
 }        
 
@@ -90,7 +90,7 @@ int insere_listad_no_ini (tp_listad *lista, peca e){
      lista->ini->ant = novo;
      lista->ini = novo;
      }  
-    //lista->tamanho++;   
+    lista->tamanho++;   
   return 0;   
 }     
 
@@ -146,7 +146,7 @@ int remove_listad(tp_listad *lista, peca e) {
     }
   }
   free(atu);
-  //lista->tamanho--;
+  lista->tamanho--;
   return 0; // Sucesso: elemento removido
 }
 
@@ -182,7 +182,7 @@ peca remove_listad_id (tp_listad *lista, peca e){
       }
      }   
    free(atu);  
-  //lista->tamanho--;   
+  lista->tamanho--;   
   return removido;   
 }
 
@@ -209,10 +209,10 @@ tp_listad * destroi_listad (tp_listad *lista){
 }
 
 //Retorna o primeiro elemento da lista
-peca primeiro_elemento(tp_listad *lista){
+/*peca primeiro_elemento(tp_listad *lista){
   if (lista != NULL && lista->ini != NULL)
     return lista->ini->info;
-}
+}*/
 
 //Realizando soma dos dois lados das peças
 int soma_lados(peca peca){

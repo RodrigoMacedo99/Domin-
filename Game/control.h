@@ -12,60 +12,41 @@
 
 
 // Função para imprimir a mesa
-void criar_pecas (peca* vetor_pecas[]){
-    int i, j;
-    srand(time(NULL));
+void criar_pecas(peca vetor_pecas[]) {
+    int i, j, k = 0;
 
     // Gerando peças de dominó
-    for(i = 0; i <= 6; i++ )
-        for(j = 0; j <= 6; j++){
-
-            peca *p = (peca*) malloc(sizeof(peca));
-            p->lado_direito = i;
-            p->lado_esquerdo = j;
-            p->id_peca = rand() % 1000;
-
-            //Atribuindo a peça ao vetor de peças
-            vetor_pecas[i*7+j] = p;
-            //printf(" id_peca: %hd\n",  vetor_pecas[i*7+j]->id_peca);
+    for (i = 0; i <= 6; i++) {
+        for (j = i; j <= 6; j++) {
+            vetor_pecas[k].id_peca = k;
+            vetor_pecas[k].lado_esquerdo = i;
+            vetor_pecas[k].lado_direito = j;
+            k++;
         }
+    }
 }
 
 // Função para embaralhar as peças
-void  embaralhar_alg_ord (peca* vetor_pecas[]){
-    int i, j, min, tam = 28;
-    peca *x;
-
-    for (i=0; i<tam-1; i++){
-        min = i;
-        for (j=i+1; j<tam; j++){
-            if (vetor_pecas[j]->id_peca < vetor_pecas[min]->id_peca)
-                min = j;
-        }
-
-        //Troca de peças
-        x = vetor_pecas[min];
-        vetor_pecas[min] = vetor_pecas[i];
-        vetor_pecas[i] = x;
+void embaralha(peca vetor_pecas[]) {
+    for (int i = 0; i < 28; i++) {
+        int j = rand() % 28;
+        // Swap para a permutação dos elementos
+        peca temp = vetor_pecas[i];
+        vetor_pecas[i] = vetor_pecas[j];
+        vetor_pecas[j] = temp;
     }
 }
 
 // Função para inicializar o jogo de dominó
-void inicializar_pecas (tp_pilha *pilha_pecas){
-
-    //Alocando memória para o vetor de peças
-    peca **vetor_pecas = (peca**) malloc(28 * sizeof(peca*));
-    for (int i = 0; i < 28; i++){
-        vetor_pecas[i] = malloc(sizeof(peca));
-    }
-
-    //Criando e embaralhando as peças
+void inicializar_pecas(tp_pilha *pilha_pecas) {
+    // Criando e embaralhando as peças
+    peca vetor_pecas[28];
     criar_pecas(vetor_pecas);
-    embaralhar_alg_ord(vetor_pecas);
+    embaralha(vetor_pecas);
 
-    //Empilhando as peças
-    for (int i = 0; i < 28; i++){
-        push(pilha_pecas, *vetor_pecas[i]);
+    // Empilhando as peças
+    for (int i = 0; i < 28; i++) {
+        push(pilha_pecas, vetor_pecas[i]);
     }
 }
 
@@ -104,7 +85,7 @@ void print_mao_jogadores(tp_fila *fila_jogadores) {
     }
 }
 
-// Função para imprimir a mesa
+// Função para imprimir a mesa do jogador
 void printar_mao_jogador(tp_fila *jogador, int vez) {
     tp_no *atu = jogador->item[vez].mao->ini;
 
@@ -167,6 +148,16 @@ int permissao_de_jogada(tp_listad *mao, tp_listad *mesa, short int id_peca){
     }
 }
 
+void inverte_peca(peca *p, tp_listad *mesa){
+    printf("entrou na inversão\n"); 
+    if(mesa->ini->info.lado_esquerdo == p->lado_esquerdo || mesa->ini->info.lado_direito == p->lado_direito){
+        int temp = p->lado_esquerdo;
+        p->lado_esquerdo = p->lado_direito;
+        p->lado_direito = temp;
+    }
+    printf("Peca invertida\n");
+}
+
 // Tirar da mão e coloca na mesa
 int mao_para_mesa (tp_listad *mao, tp_listad *mesa, short int id_peca){
     peca p;
@@ -179,6 +170,11 @@ int mao_para_mesa (tp_listad *mao, tp_listad *mesa, short int id_peca){
 
     // Busca a peça na mão pelo id
     p = buscar_peca(mao, id_peca);
+
+    // Inverte a peça se necessário
+    if(!listad_vazia(mesa)){
+        inverte_peca(&p, mesa);
+    }
 
     // Insere a peça na mesa
     int resultado_insercao = 1; 
@@ -213,8 +209,19 @@ int mao_para_mesa (tp_listad *mao, tp_listad *mesa, short int id_peca){
 // Função para comprar peça
 int comprar_peca(tp_pilha *cava, tp_listad *mao){
     peca p;
+    if(pilha_vazia(cava)){
+        printf("Cava vazia\n");
+        return 1;
+    }
     pop(cava, &p);
     insere_listad_no_fim(mao, p);
+    return 0;
+}
+
+int verificar_jogo(tp_listad *mao){
+    if(listad_vazia(mao)){
+        return 1;
+    }
     return 0;
 }
 
@@ -223,6 +230,7 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
     inicializa_pilha(pilha_pecas);
     inicializa_fila(fila_jogadores);
     inicializar_pecas(pilha_pecas);
+    imprime_pilha(*pilha_pecas);
     inicializar_jogadores(fila_jogadores, introducao());
     separa_pecas_jogadores(fila_jogadores, pilha_pecas);
     //organizar_pecas_jogador(fila_jogadores);
@@ -232,7 +240,7 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
 void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
     int vez = 0;  
     short int id_peca;
-    int posicao_peca, verificar_jogada; 
+    int verificar_jogada; 
 
     // Verificar se a mesa está vazia e inicializá-la se necessário
     if(mesa->ini != NULL && mesa->fim != NULL){
@@ -244,6 +252,7 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
     // Loop principal do jogo
     while(1){
         do{
+            printf("                  [ %s ]\n", jogadores->item[vez].nome);
             switch (menu_de_jogadas()){
                 case 1:
                     // Printar mesa
@@ -262,6 +271,7 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
                     if (comprar_peca(cava, jogadores->item[vez].mao) != 0) {
                         printf("Falha ao comprar peça.\n");
                     }
+                    print_mesa(mesa);
                     printar_mao_jogador(jogadores, vez);
                     system("pause");
                     system("cls");
@@ -271,12 +281,19 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
                     system("cls");
                     print_mesa(mesa);
                     printar_mao_jogador(jogadores, vez);
-                    escolher_peca(&id_peca);
-                    verificar_jogada = mao_para_mesa(jogadores->item[vez].mao, mesa, id_peca);
-                    if (verificar_jogada != 0) {
-                        printf("\nJogada invalida\n");
-                        Sleep(2000);
-                    }
+                    
+                    // Verifica se id da peça é válido
+                    if(escolher_peca(&id_peca) == 0){
+                        verificar_jogada = mao_para_mesa(jogadores->item[vez].mao, mesa, id_peca);
+
+                        // Verifica se a peça existe na mão do jogador
+                        if (verificar_jogada != 0) {
+                            printf("\nJogada invalida\n");
+                            Sleep(2000);
+                        }
+                    }else{
+                        verificar_jogada = 1;
+                        }
                     system("cls");
                     break;
                 case 5:
@@ -289,12 +306,18 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
                     system("cls");
                     break;
             }
+
         } while(verificar_jogada != 0);
+
+        // Verifica se o jogo acabou
+        if(verificar_jogo(jogadores->item[vez].mao)){
+            printf("O jogador %s venceu!\n", jogadores->item[vez].nome);
+            return;
+        };
 
         // Muda a vez do jogador para o próximo
         vez++;
         if(vez == tamanho_fila(*jogadores)) vez = 0;
-        printf("Tamanho da fila: %d\n", tamanho_fila(*jogadores));
     }
 }
 
