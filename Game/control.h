@@ -117,7 +117,7 @@ void alterar_id_peca(tp_listad *mao) {
     for (aux = mao->ini; aux != NULL; aux = aux->prox) {
         aux->info.id_peca = id;
         id++;
-    }
+    } 
 }
 
 // Organizar a mão de todos os jogadores de forma crescente
@@ -317,6 +317,10 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
                     system("cls");
                     break;
             }
+            
+        // Organiza as peças do jogador
+        organizar_pecas_jogador(jogadores);
+
         } while(verificar_jogada != 0);
 
         // Verifica se o jogo acabou
@@ -328,9 +332,6 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
             system("cls");
             return;
         };
-
-        // Organiza as peças do jogador
-        organizar_pecas_jogador(jogadores);
 
         // Muda a vez do jogador para o próximo
         vez++;
