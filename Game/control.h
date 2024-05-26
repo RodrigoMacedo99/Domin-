@@ -63,13 +63,6 @@ void separa_pecas_jogadores(tp_fila *fila_jogadores, tp_pilha *pilha_pecas){
     }
 }
 
-// Organizar a mão de todos os jogadores de forma crescente
-void organizar_pecas_jogador(tp_fila *jogador){
-    for(int i = 0; i <= tamanho_fila(*jogador); i++){
-        select_sort_lista(jogador->item->mao);
-    }
-}
-
 // Função para imprimir a mesa
 void print_mao_jogadores(tp_fila *fila_jogadores) {
     int numero_de_jogadores = tamanho_fila(*fila_jogadores);
@@ -100,7 +93,7 @@ void printar_mao_jogador(tp_fila *jogador, int vez) {
     // Imprime as peças com os lados
     printf("Pecas:");
     while (atu != NULL) {
-        printf("[%d:%d] ", atu->info.lado_esquerdo, atu->info.lado_direito);
+        printf("[%d:%d]", atu->info.lado_esquerdo, atu->info.lado_direito);
         atu = atu->prox;
     }
     printf("\n");
@@ -115,6 +108,25 @@ void printar_mao_jogador(tp_fila *jogador, int vez) {
         atu = atu->prox;
     }
     printf("\n");
+}
+
+// Função para imprimir a mesa
+void alterar_id_peca(tp_listad *mao) {
+    tp_no *aux;
+    int id = 1;
+    for (aux = mao->ini; aux != NULL; aux = aux->prox) {
+        aux->info.id_peca = id;
+        id++;
+    }
+}
+
+// Organizar a mão de todos os jogadores de forma crescente
+void organizar_pecas_jogador(tp_fila *jogador){
+    for(int i = 0; i <= tamanho_fila(*jogador)-1; i++){
+        select_sort_lista(jogador->item[i].mao);
+        alterar_id_peca(jogador->item[i].mao);
+        //printar_mao_jogador(jogador, i);
+    }
 }
 
 // Função para buscar peça
@@ -232,7 +244,7 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
     inicializar_pecas(pilha_pecas);
     inicializar_jogadores(fila_jogadores, introducao());
     separa_pecas_jogadores(fila_jogadores, pilha_pecas);
-    //organizar_pecas_jogador(fila_jogadores);
+    organizar_pecas_jogador(fila_jogadores);
 }
 
 // Função para jogar o jogo
@@ -305,7 +317,6 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
                     system("cls");
                     break;
             }
-
         } while(verificar_jogada != 0);
 
         // Verifica se o jogo acabou
@@ -317,6 +328,9 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
             system("cls");
             return;
         };
+
+        // Organiza as peças do jogador
+        organizar_pecas_jogador(jogadores);
 
         // Muda a vez do jogador para o próximo
         vez++;
