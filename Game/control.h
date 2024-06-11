@@ -165,9 +165,11 @@ void inverte_peca(peca *p, tp_listad *mesa){
         int temp = p->lado_esquerdo;
         p->lado_esquerdo = p->lado_direito;
         p->lado_direito = temp;
+    }else if (mesa->ini->info.lado_esquerdo == p->lado_direito || mesa->ini->info.lado_direito == p->lado_esquerdo){
+       return p;
     }else if(mesa->ini->info.lado_esquerdo == p->lado_esquerdo || mesa->ini->info.lado_direito == p->lado_direito) {
         return inverte_peca(p, mesa); // recursão para garantir que a peça seja invertida em caso de bug
-    }
+}
 }
 
 // Tirar da mão e coloca na mesa
