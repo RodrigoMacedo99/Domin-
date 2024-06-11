@@ -63,13 +63,6 @@ void separa_pecas_jogadores(tp_fila *fila_jogadores, tp_pilha *pilha_pecas){
     }
 }
 
-// Organizar a mão de todos os jogadores de forma crescente
-void organizar_pecas_jogador(tp_fila *jogador){
-    for(int i = 0; i <= tamanho_fila(*jogador); i++){
-        select_sort_lista(jogador->item->mao);
-    }
-}
-
 // Função para imprimir a mesa
 void print_mao_jogadores(tp_fila *fila_jogadores) {
     int numero_de_jogadores = tamanho_fila(*fila_jogadores);
@@ -100,7 +93,7 @@ void printar_mao_jogador(tp_fila *jogador, int vez) {
     // Imprime as peças com os lados
     printf("Pecas:");
     while (atu != NULL) {
-        printf("[%d:%d] ", atu->info.lado_esquerdo, atu->info.lado_direito);
+        printf("[%d:%d]", atu->info.lado_esquerdo, atu->info.lado_direito);
         atu = atu->prox;
     }
     printf("\n");
@@ -115,6 +108,25 @@ void printar_mao_jogador(tp_fila *jogador, int vez) {
         atu = atu->prox;
     }
     printf("\n");
+}
+
+// Função para imprimir a mesa
+void alterar_id_peca(tp_listad *mao) {
+    tp_no *aux;
+    int id = 1;
+    for (aux = mao->ini; aux != NULL; aux = aux->prox) {
+        aux->info.id_peca = id;
+        id++;
+    } 
+}
+
+// Organizar a mão de todos os jogadores de forma crescente
+void organizar_pecas_jogador(tp_fila *jogador){
+    for(int i = 0; i <= tamanho_fila(*jogador)-1; i++){
+        select_sort_lista(jogador->item[i].mao);
+        alterar_id_peca(jogador->item[i].mao);
+        //printar_mao_jogador(jogador, i);
+    }
 }
 
 // Função para buscar peça
@@ -149,13 +161,15 @@ int permissao_de_jogada(tp_listad *mao, tp_listad *mesa, short int id_peca){
 }
 
 void inverte_peca(peca *p, tp_listad *mesa){
-    printf("entrou na inversão\n"); 
     if(mesa->ini->info.lado_esquerdo == p->lado_esquerdo || mesa->ini->info.lado_direito == p->lado_direito){
         int temp = p->lado_esquerdo;
         p->lado_esquerdo = p->lado_direito;
         p->lado_direito = temp;
-    }
-    printf("Peca invertida\n");
+    }else if (mesa->ini->info.lado_esquerdo == p->lado_direito || mesa->ini->info.lado_direito == p->lado_esquerdo){
+       return p;
+    }else if(mesa->ini->info.lado_esquerdo == p->lado_esquerdo || mesa->ini->info.lado_direito == p->lado_direito) {
+        return inverte_peca(p, mesa); // recursão para garantir que a peça seja invertida em caso de bug
+}
 }
 
 // Tirar da mão e coloca na mesa
@@ -230,15 +244,14 @@ void configuracao_inicial(tp_pilha *pilha_pecas, tp_fila *fila_jogadores) {
     inicializa_pilha(pilha_pecas);
     inicializa_fila(fila_jogadores);
     inicializar_pecas(pilha_pecas);
-    imprime_pilha(*pilha_pecas);
     inicializar_jogadores(fila_jogadores, introducao());
     separa_pecas_jogadores(fila_jogadores, pilha_pecas);
-    //organizar_pecas_jogador(fila_jogadores);
+    organizar_pecas_jogador(fila_jogadores);
 }
 
 // Função para jogar o jogo
 void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
-    int vez = 0;  
+    int vez = 0, cavada = 0;  
     short int id_peca;
     int verificar_jogada; 
 
@@ -267,12 +280,28 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
                     system("cls");
                     break;
                 case 3:
+                     // Verifica se já cavou nessa rodada
+                    if(cavada == 1){
+                        verificar_jogada = 0;
+                        system("cls");
+                        printf("Voce ja cavou nessa rodada\n");
+                        printf("    Passou a vez :(\n");
+                        Sleep(3000);
+                        system("cls");
+                        break;
+                    }
+
                     // Comprar peça
                     if (comprar_peca(cava, jogadores->item[vez].mao) != 0) {
+                        system("cls");
                         printf("Falha ao comprar peça.\n");
+                        printf("\n\n\n");
                     }
+
+                    cavada++;
                     print_mesa(mesa);
                     printar_mao_jogador(jogadores, vez);
+
                     system("pause");
                     system("cls");
                     break;
@@ -288,6 +317,7 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
 
                         // Verifica se a peça existe na mão do jogador
                         if (verificar_jogada != 0) {
+                            system("cls");
                             printf("\nJogada invalida\n");
                             Sleep(2000);
                         }
@@ -307,13 +337,29 @@ void jogo(tp_fila *jogadores, tp_listad *mesa, tp_pilha *cava){
                     break;
             }
 
+            // Organiza as peças do jogador
+            organizar_pecas_jogador(jogadores);
+                    // Verifica se o jogo acabou
+            if(verificar_jogo(jogadores->item[vez].mao)){
+                system("cls");
+                printf("                       Parabens %s, voce venceu!\n", jogadores->item[vez].nome);
+                venceu();
+                Sleep(5000);
+                system("cls");
+                return;
+            }else if(pilha_vazia(cava) && verificar_jogo(jogadores->item[vez].mao)){
+                system("cls");
+                printf("                       Empate!\n");
+                venceu();
+                Sleep(5000);
+                system("cls");
+                return;
+            }
+
         } while(verificar_jogada != 0);
 
-        // Verifica se o jogo acabou
-        if(verificar_jogo(jogadores->item[vez].mao)){
-            printf("O jogador %s venceu!\n", jogadores->item[vez].nome);
-            return;
-        };
+        //zera contagem de cavadas
+        cavada = 0;
 
         // Muda a vez do jogador para o próximo
         vez++;

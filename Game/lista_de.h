@@ -215,16 +215,14 @@ tp_listad * destroi_listad (tp_listad *lista){
 }*/
 
 //Realizando soma dos dois lados das peças
-int soma_lados(peca peca){
-  return peca.lado_esquerdo + peca.lado_direito;
+int soma_lados(peca peca) {
+    return peca.lado_esquerdo + peca.lado_direito;
 }
 
-//Select Sort aplicado na mao do jogadores
+// Ordenação por Seleção aplicada na mão dos jogadores
 void select_sort_lista(tp_listad *mao) {
     tp_no *aux, *aux2, *min;
-    short int i = 0;
-
-    for (aux = mao->ini->prox; aux != NULL; aux = aux->prox) {
+    for (aux = mao->ini; aux != NULL; aux = aux->prox) {
         min = aux;
         for (aux2 = aux->prox; aux2 != NULL; aux2 = aux2->prox) {
             if (soma_lados(aux2->info) < soma_lados(min->info)) {
@@ -232,10 +230,9 @@ void select_sort_lista(tp_listad *mao) {
             }
         }
         if (min != aux) {
-            peca p = aux->info;
+            peca temp = aux->info;
             aux->info = min->info;
-            min->info = p;
-            min->info.id_peca = i+1; //alterar o id da peça
+            min->info = temp;
         }
     }
 }
