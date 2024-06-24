@@ -224,4 +224,37 @@ void venceu(){
     printf("                                                                                \n");
     printf("                                                                                \n");
 }
+
+void BackgroundMusic() {
+    int autoPlay = 0;//
+    printf("Deseja Jogar com som?: 1 para sim | 0 para nao\n");//
+    scanf("%d", &autoPlay);//
+    getchar();//  Flush the newline character left in the input buffer by scanf
+    while (TRUE) { 
+        Beep(129, 1000);//  Do
+        Sleep(100);//
+        Beep(107, 500);//  FA#
+         Sleep(100);//
+        Beep(144, 500);//  Re
+        Sleep(1500);//
+        Beep(129, 1000);//  Do
+         Sleep(100);//
+        Beep(107, 500);//  FA#
+         Sleep(100);//
+        Beep(144, 500);//  Re
+        Sleep(500);//
+        Beep(98,1000);//Fa
+        Sleep(500);//
+        Beep(129, 1000);//  Do
+         Sleep(100);//
+        Beep(164,500);//mi
+        Sleep(500);//
+        Beep(144,500);//re
+        Sleep(500);//
+        Beep(164,700);//mi
+         Sleep(50);//
+        Beep(144,700);//re
+        Sleep(50);//
+    }
+}
 #endif
